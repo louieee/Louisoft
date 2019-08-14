@@ -1,0 +1,663 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+        <title>Louis Ohaegbu Portfolio Page</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Louis Ohaegbu Portfolio page" />
+        <meta name="keywords" content="creative, cv, designer,  online cv, online resume, powerful portfolio, professional, professional resume, responsive, resume, vcard " />
+        <meta name="developer" content="Louis Ohaegbu">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- FAV AND ICONS   -->
+        <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+        <link rel="shortcut icon" href="{% static 'assets/images/apple-icon.png'%}">
+        <link rel="shortcut icon" sizes="72x72" href="{% static 'assets/images/apple-icon-72x72.png'%}">
+        <link rel="shortcut icon" sizes="114x114" href="{% static 'assets/images/apple-icon-114x114.png'%}">
+        
+        <!-- Google Font-->
+        <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="{% static 'assets/icons/font-awesome-4.7.0/css/font-awesome.min.css'%}">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/bootstrap.min.css'%}">
+        <!-- Animate CSS-->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/animate.css'%}">
+        <!-- Owl Carousel CSS-->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/owl.css'%}">
+        <!-- Fancybox-->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/jquery.fancybox.min.css'%}">
+        <!-- Custom CSS-->
+        <link rel="stylesheet" href="{% static 'assets/css/styles.css'%}">
+        <link rel="stylesheet" href="{% static 'assets/css/responsive.css'%}">
+        <link rel="stylesheet" href="{% static 'assets/css/custom.css'%}">
+
+
+    </head>
+    <body class="dark-vertion black-bg">
+
+
+    <a  href="#mh-home" id="side-home" class="btn btn-success p-2" style="
+position: fixed;
+top: 50%;
+left: 0;
+border-radius: 0 10px 10px 0;
+"><i class="fa fa-home"></i></a>
+        <!-- Start Loader -->
+        <div class="section-loader">
+            <div class="loader">
+                <div></div>
+                <div></div> 
+            </div>
+        </div>
+        <!-- End Loader -->
+        
+        <!--
+        ===================
+           NAVIGATION
+        ===================
+        -->
+        <header class="black-bg mh-header py-0 mh-fixed-nav nav-scroll mh-xs-mobile-nav wow fadeInUp" id="mh-header">
+            <div class="overlay"></div>
+                <div class="row">
+                    <nav class="mt-0 navbar navbar-expand-lg bg-theme1 mh-nav nav-btn">
+                        <button class="navbar-toggler mx-5 my-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon icon"></span>
+                        </button>
+                    
+                        <div class="collapse navbar-collapse bg-theme2" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto ml-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#mh-home">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#mh-about">About</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" href="#mh-skills">Skills</a>
+                                </li>                                
+                                <li class="nav-item">
+                                   <a class="nav-link" href="#mh-experience">Experiences</a>
+                                </li>                                
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#mh-portfolio">Portfolio</a>
+                                </li>                               
+                                <li class="nav-item">
+                                   <a class="nav-link" href="#mh-contact">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+        </header>
+
+        
+        <!--
+        ===================
+            HOME 
+        ===================
+        -->
+        <section class="mh-home" id="mh-home">
+            <div class="home-ovimg">
+                <div class="container">
+                    <div class="row  section-separator vertical-middle-content home-padding">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="hero-img  wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s">
+                                <div class="img-border">
+                                    <img src="{% static 'assets/images/image.jpg'%}" alt="Louis Ohaegbu" class="img-fluid bg-dark">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="mh-header-info">
+                                <div class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">
+                                    <p class="display-4 theme1"><span class="theme2">Hell</span>o I'm</p>
+                                </div>
+                                
+                                <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Ohae<span class="theme1">gbu Lo</span>uis</h2>
+                                <h4 class="wow fadeInUp theme2" data-wow-duration="0.8s" data-wow-delay="0.3s">Software<span class="theme1"> Developer</span> </h4>
+                                
+                                <ul>
+                                    <li class="wow fadeInUp theme1" data-wow-duration="0.8s" data-wow-delay="0.4s"><i class="fa fa-envelope"></i><a href="mailto:louis.paul9095@gmail.com">louis.paul9095@gmail.com</a></li>
+                                    <li class="wow fadeInUp theme1" data-wow-duration="0.8s" data-wow-delay="0.5s"><i class="fa fa-phone"></i><a href="callto:+2348066556479">+2348066556479</a></li>
+                                    <li class="wow fadeInUp theme1" data-wow-duration="0.8s" data-wow-delay="0.6s"><i class="fa fa-map-marker"></i><address>Hiltop Estate, UNN, Enugu state, Nigeria.</address></li>
+                                </ul>
+
+                                <ul class="social-icon wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">
+                                    <li><a  class="bg-transparent" href="#"><i class="fa fa-facebook text-primary "></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter text-primary"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-github text-danger"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram text-warning"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin-square text-success"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>   
+        
+        <!--
+        ==================
+            ABOUT
+        =================
+        -->
+        <section class="mh-about" id="mh-about">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="mh-about-img shadow-2 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">
+                            <img src="{% static 'assets/images/ab-img.png'%}" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="mh-about-inner">
+                            <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s"><span class="theme4">A</span>bo<span class="theme3">ut M</span>e</h2>
+                            <p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
+                                Hello, My Name is Ohaegbu Louis. I am from Imo State, Nigeria. I reside in Lagos State, Nigeria.
+                                I am  currently a computer science student in the University of Nigeria, Nsukka, . I am a software developer by profession.
+                                I love playing basketball, video games and i like to assist  DJs.
+                            </p>
+                            <div class="mh-about-tag wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
+                                <ul>
+                                    <li><span>Python</span></li>
+                                    <li><span>Android</span></li>
+                                    <li><span>Html5</span></li>
+                                    <li><span>css3</span></li>
+                                    <li><span>Javascript</span></li>
+                                    <li><span>React</span></li>
+                                    <li><span>Wordpress</span></li>
+                                    <li><span>Data Science</span></li>
+                                    <li><span>Machine Learning</span></li>
+                                    <li><span>Artififcial Intelligence</span></li>
+                                </ul>
+                            </div>
+                            <a href="{% static 'assets/files/cv.pdf' %}" class="btn btn-fill wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">Download CV <i class="fa fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!--
+        ===================
+           SERVICE
+        ===================
+        -->
+        <section class="mh-service">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="col-sm-12 text-center section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
+                        <h2><span class="theme1">Wh</span>at I d<span class="theme2">o</span></h2>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="mh-service-item shadow-1 dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
+                            <i class="fa fa-code theme4"></i>
+                            <h3>Fu<span class="theme4">ll Sta</span>ck Web Develo<span class="theme3">pment</span></h3>
+                            <p class="text-justify">
+                               I develop web applications; both the frontend and the backend. I use react.js and bootstrap
+                                for frontend development and i use python django and node.js as backend. I can also manage
+                                the deployed website and also wordpress sites.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="mh-service-item shadow-1 dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s">
+                            <i class="fa fa-android theme2"></i>
+                            <h3>An<span class="theme2">droid</span> App <span class="theme1"> Develop</span>ment</h3>
+                            <p class="text-justify">
+                                    I design and develop android apps.
+                                I build the android apps with the java language and kotlin
+                                programming language.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="mh-service-item shadow-1 dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">
+                            <i class="fa fa-file-code-o sky-color"></i>
+                            <h3><span class="theme3">Art</span>ificial <span class="theme1">intel</span>ligence</h3>
+                            <p class="text-justify">
+                                I use python libraries for machine learning, artificial intelligence, deep learning and data science
+                                to integrate smart features into websites, web apps, android apps and even in IOT systems.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>       
+        
+        <!--
+        ===================
+           SKILLS
+        ===================
+        -->
+        <section class="mh-skills" id="mh-skills">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="section-title text-center col-sm-12">
+                        <!--<h2>Skills</h2>-->
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="mh-skills-inner">
+                            <div class="mh-professional-skill wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
+                                <h3><span class="theme3">Tech</span>nical Skil<span class="theme1">ls</span></h3>
+                                <div class="each-skills">
+                                    <div class="candidatos">
+                                        <div class="parcial">
+                                            <div class="info">
+                                                <div class="nome">Python</div>
+                                                <div class="percentagem-num ">70%</div>
+                                            </div>
+                                            <div class="progressBar">
+                                                <div class="percentagem" style="width: 70%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="candidatos">
+                                        <div class="parcial">
+                                            <div class="info">
+                                                <div class="nome">Java</div>
+                                                <div class="percentagem-num">57%</div>
+                                            </div>
+                                            <div class="progressBar">
+                                                <div class="percentagem" style="width: 57%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="candidatos">
+                                        <div class="parcial">
+                                            <div class="info">
+                                                <div class="nome">Bootstrap</div>
+                                                <div class="percentagem-num">60%</div>
+                                            </div>
+                                            <div class="progressBar">
+                                                <div class="percentagem" style="width: 60%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="candidatos">
+                                        <div class="parcial">
+                                            <div class="info">
+                                                <div class="nome">React</div>
+                                                <div class="percentagem-num">15%</div>
+                                            </div>
+                                            <div class="progressBar">
+                                                <div class="percentagem" style="width: 15%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    <div class="candidatos">
+                                        <div class="parcial">
+                                            <div class="info">
+                                                <div class="nome"> Python Selenium</div>
+                                                <div class="percentagem-num">70%</div>
+                                            </div>
+                                            <div class="progressBar">
+                                                <div class="percentagem" style="width: 70%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="candidatos">
+                                        <div class="parcial">
+                                            <div class="info">
+                                                <div class="nome"> Aritificial Intelligence</div>
+                                                <div class="percentagem-num">30%</div>
+                                            </div>
+                                            <div class="progressBar">
+                                                <div class="percentagem" style="width: 30%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="candidatos">
+                                        <div class="parcial">
+                                            <div class="info">
+                                                <div class="nome">Web Content Management</div>
+                                                <div class="percentagem-num">70%</div>
+                                            </div>
+                                            <div class="progressBar">
+                                                <div class="percentagem" style="width: 70%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="candidatos">
+                                        <div class="parcial">
+                                            <div class="info">
+                                                <div class="nome"> Python Django</div>
+                                                <div class="percentagem-num">75%</div>
+                                            </div>
+                                            <div class="progressBar">
+                                                <div class="percentagem" style="width: 75%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="mh-professional-skills wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s">
+                            <h3>So<span class="theme1" >ft Sk</span>ills</h3>
+                            <ul class="mh-professional-progress" >
+                                <li>
+                                    <div class="mh-progress mh-progress-circle" data-progress="60"></div>
+                                    <div class="pr-skill-name">Communication</div>
+                                </li>
+                                <li>
+                                    <div class="mh-progress mh-progress-circle" data-progress="75"></div>
+                                    <div class="pr-skill-name">Team Work</div>
+                                </li>
+                                <li>
+                                    <div class="mh-progress mh-progress-circle" data-progress="86"></div>
+                                    <div class="pr-skill-name">Project Management</div>
+                                </li> 
+                                <li>
+                                    <div class="mh-progress mh-progress-circle" data-progress="80"></div>
+                                    <div class="pr-skill-name">Creativity</div>
+                                </li>
+                                <li>
+                                    <div class="mh-progress mh-progress-circle" data-progress="70"></div>
+                                    <div class="pr-skill-name">Flexibility</div>
+                                </li>
+                                <li>
+                                    <div class="mh-progress mh-progress-circle" data-progress="75"></div>
+                                    <div class="pr-skill-name">Time Management</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!--
+        ===================
+           EXPERIENCES
+        ===================
+        -->
+        <section class="mh-experince" id="mh-experience">
+            <div class="bolor-overlay">
+                <div class="container">
+                    <div class="row section-separator">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="mh-education">
+                                 <h3 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s"><span class="theme1">Educ</span>ation</h3>
+                                <div class="mh-education-deatils">
+                                    <!-- Education Institutes-->
+                                    <div class="mh-education-item dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
+                                        <h4>BSc Computer Science<a  class="theme3" href="#">University Of Nigeria, Nsukka, Enugu, Nigeria.</a></h4>
+                                        <div class="mh-eduyear">2015-2019</div>
+                                        <p>First Class Honours 4.56</p>
+                                    </div>                                
+                                    <!-- Education Institutes-->
+                                    <div class="mh-education-item dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s">
+                                        <h4>WASSCE <a href="#" class="theme3" >NOWA Secondary School, Navy-Town, Ojo, Lagos, Nigeria.</a></h4>
+                                        <div class="mh-eduyear">2007-2011</div>
+                                        <p>Chapel prefect (2011)</p>
+                                    </div>                                
+                                    <!-- Education Institutes-->
+                                    <div class="mh-education-item dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s">
+                                        <h4> <a href="#" class="theme3" >Susan Martins High School, Munshin, Lagos, Nigeria.</a></h4>
+                                        <div class="mh-eduyear">2006-2007</div>
+                                        <p></p>
+                                    </div>
+                                <!-- Education Institutes-->
+                                <div class="mh-education-item dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s">
+                                    <h4>First School Leaving Certificate <a href="#" class="theme3" >Divrel Comprehensive Nursery and Primary School, Munshin, Lagos, Nigeria.</a></h4>
+                                    <div class="mh-eduyear">2000-2005</div>
+                                    <p></p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="mh-work">
+                                <h3>Work Expe<span class="theme3">rience</span></h3>
+                                <div class="mh-experience-deatils">
+                                    <!-- Education Institutes-->
+                                    <div class="mh-work-item dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">
+                                        <h4>Webmaster/Developer @ <a class="theme1" href="#"> Cryptography Development Initative Nigeria</a></h4>
+                                        <div class="mh-eduyear">2019-Now</div>
+                                        <span>Responsibility :</span>
+                                        <ul class="work-responsibility">
+                                            <li><i class="fa fa-circle"></i>Update Web Content</li>
+                                            <li><i class="fa fa-circle"></i>Re- Design Website Theme</li>
+                                            <li><i class="fa fa-circle"></i>Research and Development</li>
+                                        </ul>
+                                    </div>                                
+                                    <!-- Education Institutes-->
+                                    <div class="mh-work-item dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s">
+                                        <h4>Webmaster @ <a href="#" class="theme1"> University of Nigeria's ICT, Zenith, Nsukka, Enugu, Nigeria.</a></h4>
+                                        <div class="mh-eduyear">2018-2019</div>
+                                        <span>Responsibility :</span>
+                                        <ul class="work-responsibility">
+                                            <li><i class="fa fa-circle"></i>Update Staffs and students' profile data on the website </li>
+                                            <li><i class="fa fa-circle"></i>Generate Backlinks for the website </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!--
+        ===================
+           PORTFOLIO
+        ===================
+        -->
+        <section class="mh-portfolio" id="mh-portfolio">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="section-title col-sm-12 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">
+                        <h3><span class="theme2">Recen</span>t Portf<span  class="theme4">oli</span>o</h3>
+                    </div>
+                    <div class="part col-sm-12">
+                        <div class="portfolio-nav col-sm-12" id="filter-button">
+                            <ul>
+                                <li data-filter="*" class="current wow fadeInUp " data-wow-duration="0.8s" data-wow-delay="0.1s"> <span>All Categories</span></li>
+                                <li data-filter=".web" class="wow fadeInUp " data-wow-duration="0.8s" data-wow-delay="0.2s"><span>Web Design</span></li>
+                                <li data-filter=".android" class="wow fadeInUp " data-wow-duration="0.8s" data-wow-delay="0.3s"><span>Android Apps</span></li>
+                                <li data-filter=".python" class="wow fadeInUp " data-wow-duration="0.8s" data-wow-delay="0.4s"><span>Python Scripts</span></li>
+                            </ul>
+                        </div>
+                        <div class="mh-project-gallery col-sm-12 wow fadeInUp" id="project-gallery" data-wow-duration="0.8s" data-wow-delay="0.5s">
+                            <div class="portfolioContainer row">
+                                <div class="grid-item col-md-4 col-sm-6 col-xs-12 web">
+                                    <figure>
+                                        <img src="{% static 'assets/images/portfolio/g1.jpg'%}" alt="img04">
+                                        <figcaption class="fig-caption">
+                                            <i class="fa fa-search"></i>
+                                            <h5 class="title">AgroCoopNaija</h5>
+                                            <span class="sub-title">An Information Exchange Platform for Agricultural Cooperatives</span>
+                                            <a href="#"></a>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item col-md-4 col-sm-6 col-xs-12 ui android">
+                                    <figure>
+                                        <img src="{% static 'assets/images/portfolio/g2.png'%}" alt="img04">
+                                        <figcaption class="fig-caption">
+                                            <i class="fa fa-search"></i>
+                                            <h5 class="title">What To Eat</h5>
+                                            <span class="sub-title">An App that  helps you decide what to eat</span>
+                                            <a href="#"></a>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item col-md-4 col-sm-6 col-xs-12 python">
+                                    <figure>
+                                        <img src="{% static 'assets/images/portfolio/g3.png'%}" alt="img04">
+                                        <figcaption class="fig-caption">
+                                            <i class="fa fa-search"></i>
+                                            <h5 class="title">Instagram Crawler</h5>
+                                            <span class="sub-title">This Script automates a lot of functions for you on your instagram page</span>
+                                            <a href="#"></a>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            </div> <!-- End: .grid .project-gallery -->
+                        </div> <!-- End: .grid .project-gallery -->
+                    </div> <!-- End: .part -->
+                </div> <!-- End: .row -->
+            </div>
+        </section>
+        <!--
+        ===================
+           FOOTER 1
+        ===================
+        -->
+        <footer class="mh-footer" id="mh-contact">
+            <div class="map-image image-bg">
+                <div class="container">
+                    <div class="row section-separator">
+                        <div class="col-sm-12 section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
+                            <h3><span class="theme3">Cont</span>act Me</h3>
+                        </div>
+                        <div class="col-sm-12 mh-footer-address">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="mh-address-footer-item dark-bg shadow-1 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
+                                        <div class="each-icon">
+                                            <i class="fa fa-location-arrow theme4"></i>
+                                        </div>
+                                        <div class="each-info">
+                                            <h4>Ad<span class="theme4">dre</span>ss</h4>
+                                            <address>
+                                                Hilltop Estate, UNN, Nsukka, Enugu, Nigeria.
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="mh-address-footer-item dark-bg shadow-1 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s">
+                                        <div class="each-icon theme3">
+                                            <i class="fa fa-envelope-o"></i>
+                                        </div>
+                                        <div class="each-info ">
+                                            <h4>E<span class="theme3">mai</span>l</h4>
+                                            <a href="mailto:louis.paul9095l@gmail.com">louis.paul9095@gmail.com</a><br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="mh-address-footer-item dark-bg shadow-1 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">
+                                        <div class="each-icon">
+                                            <i class="fa fa-phone theme2"></i>
+                                        </div>
+                                        <div class="each-info">
+                                            <h4>P<span class="theme2">ho</span>ne</h4>
+                                            <a href="callto:+2348066556479">+2348066556479</a><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
+                            <form id="contactForm" url="{% url 'email' %}" class="single-form quate-form wow fadeInUp" data-toggle="validator">
+                                <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <input name="first_name" onfocus="
+                                                document.querySelector('#msgSubmit').innerText=''; " class="contact-name form-control" id="f_name" type="text" placeholder="First Name" required>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input name="last_name" onfocus="
+                                                document.querySelector('#msgSubmit').innerText=''; "
+                                               class="contact-email form-control" id="l_name" type="text" placeholder="Last Name" required>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <input name="email" onfocus="
+                                                document.querySelector('#msgSubmit').innerText=''; "
+                                               class="contact-subject form-control" id="email" type="email" placeholder="Your Email" required>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <textarea name="message" onfocus="
+                                                document.querySelector('#msgSubmit').innerText=''; "
+                                                  class="contact-message" id="message" rows="6" placeholder="Your Message" required></textarea>
+                                    </div>
+                                    <!-- Subject Button -->
+                                    <div class="btn-form col-sm-12">
+                                        <button type="submit" class="btn bg-theme3 btn-block " id="form-submit"><span class="text text-white">Send Message</span></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-12 col-md-6 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s">
+                            <div class="mh-map">
+                                <div id="mh-map" class="shadow-1"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mh-copyright wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="text-center float-right">
+                                        <p>All right reserved <span class="theme1 h6">Louisoft</span><span class="theme2 h6"> Technologies</span> @ 2019</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="social-icon">
+                                        <li><a href="#"><i class="fa fa-facebook text-primary"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter text-primary"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-github text-danger"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram text-warning"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin-square text-light"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>     
+    
+    <!--
+    ==============
+    * JS Files *
+    ==============
+    -->
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    <!-- jQuery -->
+    <script src="{% static 'assets/plugins/js/jquery.min.js'%}"></script>
+    <!-- popper -->
+    <script src="{% static 'assets/plugins/js/popper.min.js'%}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'assets/plugins/js/bootstrap.min.js'%}"></script>
+    <!-- owl carousel -->
+    <script src="{% static 'assets/plugins/js/owl.carousel.js'%}"></script>
+    <!-- validator -->
+    <script src="{% static 'assets/plugins/js/validator.min.js'%}"></script>
+    <!-- wow -->
+    <script src="{% static 'assets/plugins/js/wow.min.js'%}"></script>
+    <!-- mixin js-->
+    <script src="{% static 'assets/plugins/js/jquery.mixitup.min.js'%}"></script>
+    <!-- circle progress-->
+    <script src="{% static 'assets/plugins/js/circle-progress.js'%}"></script>
+    <!-- jquery nav -->
+    <script src="{% static 'assets/plugins/js/jquery.nav.js'%}"></script>
+    <!-- Fancybox js-->
+    <script src="{% static 'assets/plugins/js/jquery.fancybox.min.js'%}"></script>
+    <!-- isotope js-->
+    <script src="{% static 'assets/plugins/js/isotope.pkgd.js'%}"></script>
+    <script src="{% static 'assets/plugins/js/packery-mode.pkgd.js'%}"></script>
+    <!-- Map api -->
+    <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&amp;key=AIzaSyCRP2E3BhaVKYs7BvNytBNumU0MBmjhhxc"></script>
+    <!-- Custom Scripts-->
+    <script src="{% static 'assets/js/map-init.js'%}"></script>
+    <script src="{% static 'assets/js/custom-scripts.js'%}"></script>
+    
+
+    <!-- ****************
+      After neccessary customization/modification, Please minify 
+      JavaScript/jQuery according to http://browserdiet.com/en/ for better performance
+    **************** -->
+
+</body>
+</html>
