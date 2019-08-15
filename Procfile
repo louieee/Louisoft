@@ -1,1 +1,1 @@
-web: gunicorn louisoft.wsgi --log-file -
+web: gunicorn Louisoft.wsgi --log-file -
