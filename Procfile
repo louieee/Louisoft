@@ -1,0 +1,1 @@
+web: gunicorn Louisoft.wsgi --log-file -

@@ -1,0 +1,41 @@
+@media(max-width: 700px){
+    #side-home {
+        display: none;
+    }
+}
+.theme1{
+    color: rgba(225, 143, 11, 0.99)  !important;
+}
+.theme2{
+    color: #7bff0c  !important;
+}
+.theme3{
+    color: #05aafc  !important;
+}
+.theme4{
+    color: #ff086c  !important;
+}
+@media(max-width: 990px){
+    .bg-theme2{
+        background-color: #68d70a !important;
+    }
+}
+.bg-theme1 {
+    background-color: rgba(225, 143, 11, 0.99) !important;
+}
+
+
+.bg-theme3{
+    background-color: #05aafc  !important;
+}
+.bg-theme4{
+    background-color: #ff086c  !important;
+}
+.nav-link:hover{
+    color: rgba(15, 15, 15, 0.67) !important;
+}
+a:hover{
+    color: rgba(225, 143, 11, 0.99) !important
+}
+
+
