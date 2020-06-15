@@ -6,33 +6,6 @@ from django.core.mail import send_mail
 
 
 # Create your views here.
-def save_message(message, id_):
-    try:
-        Message.objects.get(content=message, sender_id=id_)
-        return False
-    except Message.DoesNotExist:
-        content = Message()
-        content.sender_id = id_
-        content.content = message
-        content.dateTime = d.now()
-        content.save()
-        return True
-
-
-def check_user(name, email, message):
-    try:
-        customer = Customer.objects.get(email=email, name=name)
-        return save_message(message, customer.id)
-    except Customer.DoesNotExist:
-        try:
-            customer = Customer.objects.get(email=email)
-            return save_message(message, customer.id)
-        except Customer.DoesNotExist:
-            customer = Customer()
-            customer.name = name
-            customer.email = email
-            customer.save()
-            return save_message(message, customer.id)
 
 
 def send_message(request):
