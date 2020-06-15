@@ -48,7 +48,7 @@ def send_message(request):
         try:
             customer = Customer.objects.get(name=name)
             try:
-                message = Message.objects.get(content=message)
+                Message.objects.get(content=message)
                 request.session['message'] = 'Message sent already.'
                 request.session['status'] = 'danger'
                 return redirect('index')
@@ -56,6 +56,7 @@ def send_message(request):
                 message = Message()
                 message.content = message
                 message.sender = customer
+                message.dateTime = d.now()
                 message.save()
                 request.session['message'] = 'Message Sent. We will keep in touch.'
                 request.session['status'] = 'success'
