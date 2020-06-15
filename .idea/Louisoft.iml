@@ -17,8 +17,15 @@
       <excludeFolder url="file://$MODULE_DIR$/my_venv" />
       <excludeFolder url="file://$MODULE_DIR$/my_venv2" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.7 (Louisoft)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.7 (basicenv)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="all" level="application" />
+    <orderEntry type="library" name="font-awesome" level="application" />
+    <orderEntry type="library" name="animate.css" level="application" />
+    <orderEntry type="library" name="aos" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="twitter-bootstrap" level="application" />
+    <orderEntry type="library" name="jquery-easing" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
