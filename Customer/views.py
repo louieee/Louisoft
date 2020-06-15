@@ -41,7 +41,6 @@ def send_message(request):
         email = request.POST['email']
         message = request.POST['message']
         phone = request.POST['phone']
-        no_message = False
         if not (name and email and message):
             request.session['message'] = 'Some Fields are not Filled.'
             request.session['status'] = 'danger'
@@ -54,14 +53,20 @@ def send_message(request):
                 request.session['status'] = 'danger'
                 return redirect('index')
             except Message.DoesNotExist:
-                no_message = True
+                message = Message()
+                message.content = message
+                message.sender = customer
+                message.save()
+                request.session['message'] = 'Message Sent. We will keep in touch.'
+                request.session['status'] = 'success'
+                return redirect('index')
+
         except Customer.DoesNotExist:
             customer = Customer()
             customer.name = name
             customer.email = email
             customer.phone = phone
             customer.save()
-        if no_message:
             message = Message()
             message.content = message
             message.sender = customer
