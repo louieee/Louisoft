@@ -53,14 +53,7 @@ def send_message(request):
                 request.session['status'] = 'danger'
                 return redirect('index')
             except Message.DoesNotExist:
-                message = Message()
-                message.content = message
-                message.sender = customer
-                message.dateTime = d.now()
-                message.save()
-                request.session['message'] = 'Message Sent. We will keep in touch.'
-                request.session['status'] = 'success'
-                return redirect('index')
+                add_message(request, customer)
 
         except Customer.DoesNotExist:
             customer = Customer()
@@ -68,10 +61,15 @@ def send_message(request):
             customer.email = email
             customer.phone = phone
             customer.save()
-            message = Message()
-            message.content = message
-            message.sender = customer
-            message.save()
-            request.session['message'] = 'Message Sent. We will keep in touch.'
-            request.session['status'] = 'success'
-            return redirect('index')
+            add_message(request, customer)
+
+
+def add_message(request, customer):
+    message = Message()
+    message.content = message
+    message.sender = customer
+    message.dateTime = d.now()
+    message.save()
+    request.session['message'] = 'Message Sent. We will keep in touch.'
+    request.session['status'] = 'success'
+    return redirect('index')
