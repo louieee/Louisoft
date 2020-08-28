@@ -1,54 +1,8 @@
+{% extends 'Louisoft/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Ohaegbu Uzochukwu Louis </title>
-    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-    <link rel="stylesheet" href="{% static 'assets/css/styles.min.css' %}">
-</head>
-
-<body id="page-top">
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top text-light bg-secondary text-center text-uppercase" data-aos="slide-left" data-aos-duration="2000" data-aos-delay="2000" id="mainNav" style="filter: blur(0px) brightness(188%) contrast(62%) grayscale(0%) hue-rotate(112deg) invert(0%);">
-        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Louisane&nbsp;<i class="fas fa-laptop-code pulse animated infinite" style="color: rgb(113,208,203);"></i></a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler text-light navbar-toggler-right text-uppercase text-white rounded"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #2d3b22;"><i class="fa fa-bars"></i></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link text-light border rounded py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio" style="background-color: #113740;">Portfolio</a></li>
-                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link border rounded py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about" style="background-color: #113740;">About</a></li>
-                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link border rounded py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact" style="background-color: #113740;">Contact</a></li>
-                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link border rounded py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'resumee' %}" style="background-color: #113740;">My Resumee</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <header class="text-white masthead text-white text-center" style="background-color: #ba7853;">
-        <div class="container" data-aos="slide-right" data-aos-duration="2000">
-            {% if message %}
-            <div class="alert alert-{{ status }} alert-dismissible fade show" role="alert">
-              <strong>{{ message }}</strong>
-
-            </div>
-            {% endif %}
-            <img class="rounded-circle img-fluid bg-light border border-info shadow-lg d-block mx-auto mb-5" src="{% static 'assets/img/C360_2020-03-16-09-52-19-393.jpg' %}" style="background-image: url(&quot;assets/img/C360_2020-03-16-09-52-19-393.jpg&quot;);background-size: contain;background-repeat: no-repeat;background-position: top;"
-                width="200" alt="profile picture">
-            <h1>Louis Ohaegbu</h1>
-            <hr class="rubberBand animated infinite star-light">
-            <h2 class="font-weight-light mb-0">Software Developer - Tech Enthusiast - Teacher</h2>
-            <hr>
-            <h2 class="font-weight-light mb-0"></h2>
-        </div>
-    </header>
-    <section id="portfolio" class="portfolio">
+{% block content %}
+<section id="portfolio" class="portfolio">
         <div class="container">
             <h2 class="text-uppercase text-center text-secondary">Portfolio</h2>
             <hr class="rubberBand animated infinite star-dark mb-5">
@@ -101,71 +55,46 @@
             </div>
         </div>
     </section>
-    <footer class="footer text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-5 mb-lg-0 col-md-6">
-                    <h4 class="text-uppercase mb-4">Location</h4>
-                    <p>16, Eluemeke Street. Newsite Estate. Staellite Town. Lagos state. Nigeria.</p>
-                </div>
-                <div class="col-md-4 mb-5 mb-lg-0 col-md-6">
-                    <h4 class="text-uppercase">Around the Web</h4>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a class="btn btn-outline-light jello animated infinite btn-social text-center rounded-circle" role="button" href="http://www.facebook.com/louisaneii"><i class="fa fa-facebook fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a class="btn btn-outline-light shake animated infinite btn-social text-center rounded-circle" role="button" href="http://www.twitter.com/louis_ohaegbu"><i class="fa fa-twitter fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a class="btn btn-outline-light rubberBand animated infinite btn-social text-center rounded-circle" role="button" href="http://www.linkedin.com/in/louis-uzochukwu-b01a41184"><i class="fa fa-linkedin fa-fw"></i></a></li>
-                    </ul>
-                </div>
+{% endblock content %}
+
+{% block title %}
+{% endblock %}
+
+{% block header %}
+    <header class="text-white masthead text-white text-center" style="background-color: #ba7853;">
+        <div class="container" data-aos="slide-right" data-aos-duration="2000">
+            {% if message %}
+            <div class="alert alert-{{ status }} alert-dismissible fade show" role="alert">
+              <strong>{{ message }}</strong>
+
             </div>
+            {% endif %}
+            <img class="rounded-circle img-fluid bg-light border border-info shadow-lg d-block mx-auto mb-5" src="{% static 'assets/img/C360_2020-03-16-09-52-19-393.jpg' %}" style="background-image: url(&quot;assets/img/C360_2020-03-16-09-52-19-393.jpg&quot;);background-size: contain;background-repeat: no-repeat;background-position: top;"
+                width="200" alt="profile picture">
+            <h1>Louis Ohaegbu</h1>
+            <hr class="rubberBand animated infinite star-light">
+            <h2 class="font-weight-light mb-0">Software Developer - Tech Enthusiast - Teacher</h2>
+            <hr>
+            <h2 class="font-weight-light mb-0"></h2>
         </div>
-    </footer>
-    <div class="copyright py-4 text-center text-white">
-        <div class="container"><span>Copyright © Louisoft 2020</span></div>
-    </div>
-    <div class="d-lg-none scroll-to-top position-fixed rounded"><a class="d-block js-scroll-trigger text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a></div>
-    <div class="modal text-center" role="dialog" tabindex="-1" data-aos="slide-right" id="portfolio-modal-1">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-                <div class="modal-body">
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col-lg-8 mx-auto">
-                                <h2 class="text-uppercase text-secondary mb-0">Datefix</h2>
-                                <hr class="shake animated infinite star-dark mb-5"><img class="img-fluid mb-5" src="{% static 'assets/img/datefix.png' %}">
-                                <p class="mb-5" style="font-size: 20px;font-family: calibri;">This website is a dating site that allows participants to find who they specifically want.&nbsp; In this project, I was the backend developer.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer pb-5"><a class="btn btn-primary btn-lg mx-auto wobble animated infinite rounded-pill portfolio-modal-dismiss" role="button" href="http://datefixe.herokuapp.com">Visit the website</a></div>
-            </div>
-        </div>
-    </div>
-    <div class="modal text-center" role="dialog" tabindex="-1" data-aos="slide-right" id="portfolio-modal-2">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-                <div class="modal-body">
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col-lg-8 mx-auto">
-                                <h2 class="text-uppercase text-secondary mb-0">CHAT WITH ME</h2>
-                                <hr class="shake animated infinite star-dark mb-5"><img class="img-fluid mb-5" src="{% static 'assets/img/chatwithme.png' %}">
-                                <p class="mb-5" style="font-size: 20px;font-family: calibri;">This is a website in which partners meet exactly who they want. I developed both the frontend and the backend.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer pb-5"><a class="btn btn-primary btn-lg mx-auto wobble animated infinite rounded-pill portfolio-modal-dismiss" role="button" href="http://chatmedia.herokuapp.com">Visit the website</a></div>
-            </div>
-        </div>
-    </div>
+    </header>
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+    <link rel="stylesheet" href="{% static 'assets/css/styles.min.css' %}">
+{% endblock %}
+{% block script %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="{% static 'assets/js/script.min.js' %}"></script>
-</body>
-
-</html>
+{% endblock %}

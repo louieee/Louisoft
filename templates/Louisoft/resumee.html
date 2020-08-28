@@ -1,27 +1,19 @@
+{% extends 'Louisoft/base.html' %}
 {% load static %}
-<!doctype html>
-<html class="no-js" lang="">
 
-<head>
-  <meta charset="utf-8">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="apple-touch-icon" href="icon.png">
+{% block link %}
+<link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
 
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
-
-
-  <meta name="theme-color" content="#fafafa">
-</head>
-
-<body>
+{% endblock %}
+{% block content %}
   <main class="row border border-warning border-5 rounded m-3 display-4">
     <div class="col-sm-2 bg-secondary p-3 text text-white font-weight-normal">
        <header class="text-center">
+           <br/><br/>
          <img class="img img-thumbnail rounded-circle border border-0"
               src="{% static 'assets/img/C360_2020-03-16-09-52-19-393.jpg' %}" height="50%" width="50%"/>
        </header>
@@ -97,6 +89,7 @@
       <div class="row">
         <div class="col-sm-12">
           <header style="font-size: small;">
+              <br/><br/><br/><br/><br/><br/>
             <h1 style="font-size: xx-large">OHAEGBU UZOCHUKWU LOUIS</h1>
             <p class="font-weight-normal">16 Eluemeke street, New-Site Estate, Satellite Town, Lagos state. Nigeria.</p>
             <p class="font-weight-normal"><span class="p-1 mr-2"><i class="fas fa-phone"></i></span> +2348066556479</p>
@@ -217,6 +210,8 @@
     </div>
 
   </main>
+{% endblock %}
+{% block script %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
@@ -230,5 +225,4 @@
     ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async></script>
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Ohaegbu Uzochukwu Louis ||  {% block title %}{% endblock %} </title>
+    {% block link %}{% endblock %}
+</head>
+
+<body id="page-top">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top text-light bg-secondary text-center text-uppercase" data-aos="slide-left" data-aos-duration="2000" data-aos-delay="2000" id="mainNav" style="filter: blur(0px) brightness(188%) contrast(62%) grayscale(0%) hue-rotate(112deg) invert(0%);">
+        <div class="container"><a class="navbar-brand js-scroll-trigger" href="{% url 'index' %}">Louisane&nbsp;<i class="fas fa-laptop-code pulse animated infinite" style="color: rgb(113,208,203);"></i></a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler text-light navbar-toggler-right text-uppercase text-white rounded"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #2d3b22;"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link text-light border rounded py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'index' %}#portfolio" style="background-color: #113740;">Portfolio</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link border rounded py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'index' %}#about" style="background-color: #113740;">About</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link border rounded py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'index' %}#contact" style="background-color: #113740;">Contact</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link border rounded py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'resumee' %}" style="background-color: #113740;">My Resumee</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link border rounded py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'job_post' %}" style="background-color: #113740;">Post a Job</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block header %}{% endblock %}
+    {% block content %}{% endblock %}
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-5 mb-lg-0 col-md-6">
+                    <h4 class="text-uppercase mb-4">Location</h4>
+                    <p>16, Eluemeke Street. Newsite Estate. Staellite Town. Lagos state. Nigeria.</p>
+                </div>
+                <div class="col-md-4 mb-5 mb-lg-0 col-md-6">
+                    <h4 class="text-uppercase">Around the Web</h4>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a class="btn btn-outline-light jello animated infinite btn-social text-center rounded-circle" role="button" href="http://www.facebook.com/louisaneii"><i class="fa fa-facebook fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a class="btn btn-outline-light shake animated infinite btn-social text-center rounded-circle" role="button" href="http://www.twitter.com/louis_ohaegbu"><i class="fa fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a class="btn btn-outline-light rubberBand animated infinite btn-social text-center rounded-circle" role="button" href="http://www.linkedin.com/in/louis-uzochukwu-b01a41184"><i class="fa fa-linkedin fa-fw"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="copyright py-4 text-center text-white">
+        <div class="container"><span>Copyright © Louisoft 2020</span></div>
+    </div>
+    <div class="d-lg-none scroll-to-top position-fixed rounded"><a class="d-block js-scroll-trigger text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a></div>
+    <div class="modal text-center" role="dialog" tabindex="-1" data-aos="slide-right" id="portfolio-modal-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col-lg-8 mx-auto">
+                                <h2 class="text-uppercase text-secondary mb-0">Datefix</h2>
+                                <hr class="shake animated infinite star-dark mb-5"><img class="img-fluid mb-5" src="{% static 'assets/img/datefix.png' %}">
+                                <p class="mb-5" style="font-size: 20px;font-family: calibri;">This website is a dating site that allows participants to find who they specifically want.&nbsp; In this project, I was the backend developer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer pb-5"><a class="btn btn-primary btn-lg mx-auto wobble animated infinite rounded-pill portfolio-modal-dismiss" role="button" href="http://datefixe.herokuapp.com">Visit the website</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal text-center" role="dialog" tabindex="-1" data-aos="slide-right" id="portfolio-modal-2">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col-lg-8 mx-auto">
+                                <h2 class="text-uppercase text-secondary mb-0">CHAT WITH ME</h2>
+                                <hr class="shake animated infinite star-dark mb-5"><img class="img-fluid mb-5" src="{% static 'assets/img/chatwithme.png' %}">
+                                <p class="mb-5" style="font-size: 20px;font-family: calibri;">This is a website in which partners meet exactly who they want. I developed both the frontend and the backend.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer pb-5"><a class="btn btn-primary btn-lg mx-auto wobble animated infinite rounded-pill portfolio-modal-dismiss" role="button" href="http://chatmedia.herokuapp.com">Visit the website</a></div>
+            </div>
+        </div>
+    </div>
+    {% block script %}{% endblock %}
+</body>
+
+</html>

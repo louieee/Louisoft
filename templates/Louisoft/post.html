@@ -1,0 +1,83 @@
+{% extends 'Louisoft/base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="portfolio" class="portfolio m-5">
+      <br/>
+        <div class="container my-5">
+            <h2 class="text-uppercase text-center text-secondary">Project Proposal</h2>
+            <hr class="rubberBand animated infinite star-dark mb-5">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8 ">
+                    <form class="row form-group" action="{% url 'job_post' %}" method="post">
+                        {% csrf_token %}
+                <label class="col-sm-12">
+                    <h5>Project Name</h5>
+                    <input class="form-control" type="text" name="project_name" required>
+                    <hr/>
+                </label>
+                <label class="col-sm-12">
+                    <h5>Project Description</h5>
+                    <textarea class="form-control" rows="5" name="project_desc" required></textarea>
+                    <hr/>
+                </label>
+                <label class="col-sm-12">
+                    <h5>Project Budget</h5>
+                    <select class="form-control" type="text" name="project_budget">
+                        <option value="1">$100 - 250$</option>
+                        <option value="2">$250 - 500$</option>
+                        <option value="3">$500 - $1000</option>
+                        <option value="4">$1000 - $2500</option>
+                        <option value="5">More than $2500</option>
+                    </select>
+                    <hr/>
+                </label>
+                <label class="col-sm-12">
+                    <h5>Client's Name</h5>
+                    <input class="form-control" type="text" name="client_name" required>
+                    <hr/>
+                </label>
+                <label class="col-sm-12">
+                    <h5>Client's Phone Number</h5>
+                    <input class="form-control" type="tel" name="client_phone" required>
+                    <hr/>
+                </label>
+                <label class="col-sm-12">
+                    <h5>Client's Email Address</h5>
+                    <input class="form-control" type="email" name="client_email" required>
+                    <hr/>
+                </label>
+                <div class="col-sm-12">
+                    <input class="btn btn-block btn-success" type="submit">
+                </div>
+            </form>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+    </section>
+  {% endblock content %}
+
+{% block title %}
+    Post a Job
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+    <link rel="stylesheet" href="{% static 'assets/css/styles.min.css' %}">
+{% endblock %}
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+{% endblock %}

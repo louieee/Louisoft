@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .view import index, cv
+from .view import index, cv, post_job
 from Customer.views import send_message
 from django.conf import settings
 from django.conf.urls.static import static
@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('email/', send_message, name="email"),
-    path('resumee/', cv, name="resumee")
+    path('resumee/', cv, name="resumee"),
+    path('post/job/', post_job, name="job_post")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
