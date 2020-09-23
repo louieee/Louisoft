@@ -43,3 +43,6 @@ def post_job(request):
             request.session['status'] = 'success'
         return redirect('job_post')
 
+
+def trade(request):
+    return render(request, 'Louisoft/Trade.html')

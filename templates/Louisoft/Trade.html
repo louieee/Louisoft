@@ -1,0 +1,73 @@
+{% extends 'Louisoft/base.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="p-5">
+    <div id="result" class="d-none">
+    <h1 class="text-success py-5">Set Take Profit at <span class="text-dark" id="tp">132456.122</span></h1>
+    <h1 class="text-danger pb-5">Set Stop Loss at <span class="text-dark" id="sl">12355.16554</span></h1>
+
+        <a id="continue" onclick="return_()" class="btn btn-info text-white">Continue</a>
+    </div>
+    <form class="container pt-5 bg-light row d-block" id="trade_form">
+        <label class="col-sm-12">
+            What Indices are you trading?
+            <select class="form-control" id="time">
+                <option value="63">500</option>
+                <option value="85">1000</option>
+            </select>
+        </label>
+        <label class="col-12">
+            What Position are you trading?
+            <select class="form-control" id="position">
+                <option value="+">Buy</option>
+                <option value="-">Sell</option>
+            </select>
+        </label>
+        <label class="col-12">
+            How much do you need in this trade?
+            <input class="form-control" id="profit" type="number"/>
+        </label>
+        <label class="col-12">
+            Whats your stop loss?
+            <input class="form-control" id="stoploss" type="number"/>
+        </label>
+        <label class="col-12">
+            Whats your Entry Point
+            <input class="form-control" id="entry" type="number"/>
+        </label>
+
+        <label class="col-12">
+            How much are you staking?
+            <input class="form-control" id="stake" type="number"/>
+        </label>
+        <div class="col-12">
+            <a class="btn btn-success"  id="button" onclick="display()">Submit</a>
+        </div>
+    </form>
+    </div>
+
+{% endblock %}
+{% block script %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+    <script src="{% static 'js/trade.js' %}"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+{% endblock %}
