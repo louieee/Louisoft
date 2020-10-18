@@ -16,12 +16,12 @@ def _404(request):
 def enter_the_chat(request):
     if request.method == 'POST':
         consultant = request.POST['consultant']
-        _consultant = Consultant.objects.get(code=consultant)
+        _consultant = Consultant.objects.filter(code=consultant).first()
+        if _consultant is None:
+            return redirect('404')
         ip_address = fetch_ip_address(request)
         blocked = _consultant.__blocked__()
         if ip_address in blocked:
-            return redirect('404')
-        if _consultant is None:
             return redirect('404')
         if new_day(_consultant.date):
             _consultant.date = datetime.now().date()
@@ -40,6 +40,10 @@ def enter_the_chat(request):
             anon_chat = Chat.objects.create(ip_address=ip_address,
                                             name=generate_username('Anonymous'),
                                             consultant=_consultant)
+
+        anon_chat.admitted = True
+        anon_chat.chats()
+        anon_chat.save()
         visitors.append(ip_address)
         _consultant.visitors = json.dumps(visitors)
         _consultant.save()
@@ -121,23 +125,19 @@ def get_receipt(request):
         return json.dumps(order.receipt())
 
 
-def block(request):
-    if request.method == 'GET':
-        name = request.GET.get('name')
-        chat = Chat.objects.get(name=name)
-        blocked = chat.consultant.__blocked__()
-        blocked.append(chat.ip_address)
-        chat.consultant.blocked = blocked
-        chat.consultant.save()
-        return HttpResponse('OK')
+def block(chat):
+    chat.blocked = True
+    chat.save()
+    blocked = chat.consultant.__blocked__()
+    blocked.append(chat.ip_address)
+    chat.consultant.blocked = blocked
+    chat.consultant.save()
 
 
-def dismiss(request):
-    if request.method == 'GET':
-        name = request.GET.get('name')
-        chat = Chat.objects.get(name=name)
-        dismissed = chat.consultant.__dismissed__()
-        dismissed.append(chat.ip_address)
-        chat.consultant.dismissed = dismissed
-        chat.consultant.save()
-        return HttpResponse('OK')
+def dismiss(chat):
+    chat.admitted = False
+    chat.save()
+    dismissed = chat.consultant.__dismissed__()
+    dismissed.append(chat.ip_address)
+    chat.consultant.dismissed = dismissed
+    chat.consultant.save()

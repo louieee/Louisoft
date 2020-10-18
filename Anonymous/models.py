@@ -1,5 +1,7 @@
 import json
+from datetime import datetime, timezone, timedelta
 
+from cryptography.fernet import Fernet
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -11,21 +13,43 @@ class Chat(models.Model):
     name = models.CharField(max_length=24, default=None)
     ip_address = models.CharField(max_length=30, default=None)
     consultant = models.ForeignKey('Anonymous.Consultant', on_delete=models.SET_NULL, default=None, null=True)
+    secret = models.BinaryField(default=Fernet.generate_key())
+    admitted = models.BooleanField(default=False)
+    blocked = models.BooleanField(default=False)
+
+    def encrypt(self, data):
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).encrypt(data.encode()).decode()
+
+    def decrypt(self, cipher_text):
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).decrypt(cipher_text.encode()).decode()
 
     def chats(self):
-        return [{'id': msg.id, 'text': msg.text, 'image': msg.image.url,
+        return [{'id': msg.id, 'text': self.decrypt(msg.txt), 'image': msg.__image__(),
                  'date': msg.time.strftime('%A, %b %e %Y.'),
                  'time': msg.time.strftime('%I : %M %p'),
                  'chat': self.name, "consultant": msg.consultant}
                 for msg in Message.objects.filter(chat=self)]
 
+    def unseen_messages(self, user):
+        if user == 'consultant':
+            return Message.objects.filter(chat=self, send_status=Message.SENT, consultant=True)
+        return Message.objects.filter(chat=self, send_status=Message.SENT, consultant=False)
+
+    def number_of_unseen_msgs(self, user):
+        return self.unseen_messages(user).count()
+
 
 class Message(models.Model):
+    NOT_SENT, SENT, DELIVERED = range(3)
+    STATUS = (("NOT_SENT", NOT_SENT), ('SENT', SENT), ("DELIVERED", DELIVERED))
     consultant = models.NullBooleanField(default=None)
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, default=None)
     text = models.TextField(default=None)
     image = models.ImageField(default=None, upload_to=f'{chat.name}/message/images')
     time = models.DateTimeField(auto_now=True)
+    send_status = models.PositiveSmallIntegerField(default=NOT_SENT, choices=STATUS)
 
     def __time__(self):
         return self.time.strftime('%I : %M %p')
@@ -34,7 +58,17 @@ class Message(models.Model):
         return self.time.strftime('%A, %b %e %Y.')
 
     def __image__(self):
-        return self.image.url
+        if self.image is not None:
+            return self.image.url
+        return None
+
+    def expired(self):
+        if (datetime.now(timezone.utc) - self.time) > timedelta(seconds=180):
+            return True
+        return False
+
+    def decrypted_text(self):
+        return self.chat.decrypt(self.text)
 
 
 class Consultant(models.Model):
