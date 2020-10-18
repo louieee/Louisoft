@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from .view import index, cv, post_job, trade
 from Customer.views import send_message
 from django.conf import settings
@@ -26,5 +26,6 @@ urlpatterns = [
     path('email/', send_message, name="email"),
     path('resumee/', cv, name="resumee"),
     path('post/job/', post_job, name="job_post"),
-    path('trade/', trade, name="trade")
+    path('trade/', trade, name="trade"),
+    path('', include('Anonymous.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
