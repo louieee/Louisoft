@@ -27,5 +27,5 @@ urlpatterns = [
     path('resumee/', cv, name="resumee"),
     path('post/job/', post_job, name="job_post"),
     path('trade/', trade, name="trade"),
-    path('', include('Anonymous.urls'))
+    path('consult/', include('Anonymous.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

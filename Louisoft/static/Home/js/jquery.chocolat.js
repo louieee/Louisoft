@@ -109,7 +109,7 @@
 					case 27:
 						close();
 						break;
-				};
+				}
 			});
 			if(settings.vache){
 				$('#Choco_overlay').click(function(){
@@ -272,8 +272,8 @@
 						limg = k * himg;
 					}else{
 						notFitting = false;
-					};
-				};
+					}
+				}
 			return {
 				largeur:limg,
 				hauteur:himg

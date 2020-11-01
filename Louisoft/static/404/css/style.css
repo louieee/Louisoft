@@ -120,8 +120,7 @@ Author URL: http://w3layouts.com
 
   /*-- main --*/
   .mainw3.form {
-      background: url(../images/error-bg.jpg) no-repeat center;
-      background-attachment: fixed;
+      background: url(../images/error-bg.jpg) no-repeat fixed center;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       background-size: cover;

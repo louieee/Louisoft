@@ -1105,7 +1105,7 @@ function filtered(js) {
     if (args) args = ', ' + args;
     return 'filters.' + name + '(' + js + args + ')';
   });
-};
+}
 
 /**
  * Re-throw the given `err` in context to the
