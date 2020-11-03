@@ -31,8 +31,8 @@ def _404(request, reason):
 
 
 def enter_the_chat(request):
-	if request.method == 'POST':
-		consultant = request.POST['consultant']
+	if request.method == 'GET':
+		consultant = request.GET['consultant']
 		_consultant = Consultant.objects.filter(code=consultant).first()
 		if _consultant is None:
 			return redirect('404', reason=WRONG_URL)
@@ -69,7 +69,10 @@ def enter_the_chat(request):
 
 def chat(request, name):
 	if request.method == 'GET':
-		chat_session = Chat.objects.get(name=name)
+		try:
+			chat_session = Chat.objects.get(name=name)
+		except Chat.DoesNotExist:
+			return redirect('404', reason=WRONG_URL)
 		consultant = chat_session.consultant
 		if chat_session.ip_address in consultant.__dismissed__():
 			return redirect('404', reason=DISMISSED)
@@ -111,7 +114,7 @@ def store_room(request):
 			if chat_session.ip_address in consultant.__blocked__():
 				return redirect('404', reason=BLOCKED)
 		except Chat.DoesNotExist:
-			return redirect('404', reson=NOT_ALLOWED)
+			return redirect('404', reason=NOT_ALLOWED)
 		products = None
 		if category is not None:
 			category = dict(Product.CATEGORIES)[category]
@@ -136,6 +139,11 @@ def make_order(request):
 
 def home(request):
 	return render(request, 'Louisoft/Anonymous/home.html')
+
+
+def logistics(request, order):
+	if request.method == 'GET':
+		return render(request, 'Louisoft/Anonymous/order.html')
 
 
 def show_order(request, order):

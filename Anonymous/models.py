@@ -114,6 +114,8 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     chat = models.ForeignKey('Anonymous.Chat', on_delete=models.CASCADE, default=None)
     mode_of_payment = models.PositiveSmallIntegerField(default=OFFLINE, choices=MODE_OF_PAYMENT)
+    address = models.CharField(default='', max_length=225)
+    phone = models.CharField(default=None, max_length=15)
     date_of_order = models.DateTimeField(auto_now=True)
     date_of_payment = models.DateTimeField(default=None)
 
