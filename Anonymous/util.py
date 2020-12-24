@@ -20,6 +20,6 @@ def generate_username(user):
 
 def new_day(day):
     date_ = datetime.now().date()
-    if date_ - day > 0:
+    if (date_ - day).days > 0:
         return True
     return False

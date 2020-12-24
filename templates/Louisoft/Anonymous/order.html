@@ -31,23 +31,23 @@
     <h2>Make Your Order</h2>
     <div class="w3layouts">
         <div class="photos-upload-view">
-            <form action="#" method="POST">
+            <form action="{% url 'logistics' order.id %}" method="POST">
                 <div class="agileinfo">
                 </div>
                 <div class="agileinfo-row">
                     <div class="ferry ferry-from">
                         <label>Address</label>
-                        <input type="text" name="Name" placeholder="" required="">
+                        <input type="text" name="address" placeholder="" required="">
                     </div>
                     <div class="ferry ferry-from">
                         <label>Phone Number</label>
-                        <input type="text" name="Name" placeholder="" required="">
+                        <input type="tel" name="phone" placeholder="" required="">
                     </div>
 
 
                     <div class="ferry ferry-from">
                         <label>Order ID</label>
-                        <input type="text" name="Name" placeholder="" required="">
+                        <input type="text" disabled name="order_id" value="{{ order.id }}" placeholder="" required="">
                     </div>
                 </div>
                 <div class="wthree-text">

@@ -796,6 +796,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </tr>
                 </thead>
                 <tbody>
+                {% for order in orders %}
                 <tr class="rem1">
                     <td class="invert">1</td>
                     <td class="invert-image"><a href="single.html"><img src="{% static 'Store/images/1.png' %}" alt=" "
@@ -819,53 +820,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                     </td>
                 </tr>
-                <tr class="rem2">
-                    <td class="invert">2</td>
-                    <td class="invert-image"><a href="single.html"><img src="{% static 'Store/images/3.png' %}" alt=" "
-                                                                        class="img-responsive"></a></td>
-                    <td class="invert">
-                        <div class="quantity">
-                            <div class="quantity-select">
-                                <div class="entry value-minus">&nbsp;</div>
-                                <div class="entry value"><span>1</span></div>
-                                <div class="entry value-plus active">&nbsp;</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="invert">Basmati Rise (5 Kg)</td>
-
-                    <td class="invert">$250.00</td>
-                    <td class="invert">
-                        <div class="rem">
-                            <div class="close2"></div>
-                        </div>
-
-                    </td>
-                </tr>
-                <tr class="rem3">
-                    <td class="invert">3</td>
-                    <td class="invert-image"><a href="single.html"><img src="{% static 'Store/images/2.png' %}" alt=" "
-                                                                        class="img-responsive"></a></td>
-                    <td class="invert">
-                        <div class="quantity">
-                            <div class="quantity-select">
-                                <div class="entry value-minus">&nbsp;</div>
-                                <div class="entry value"><span>1</span></div>
-                                <div class="entry value-plus active">&nbsp;</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="invert">Pepsi Soft Drink (2 Ltr)</td>
-
-                    <td class="invert">$15.00</td>
-                    <td class="invert">
-                        <div class="rem">
-                            <div class="close3"></div>
-                        </div>
-
-                    </td>
-                </tr>
-
+                {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -875,7 +830,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul>
 
 
-                    <li>Total <i>-</i> <span>$84.00</span></li>
+                    <li>Total <i>-</i> <span>N 84.00</span></li>
                 </ul>
                 <h4>Continue to basket</h4></div>
 

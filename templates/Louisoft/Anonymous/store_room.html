@@ -561,28 +561,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- top-brands -->
 <div class="top-brands">
     <div class="container">
-        <h3>Hot Offers</h3>
+        <h3 class="mb-5">Hot Offers</h3>
+        <button class="btn btn-pulse btn-primary mt-5">Checkout</button>
+
         <div class="agile_top_brands_grids">
             {% for product in products %}
             <div class="col-md-3 top_brand_left">
                 <div class="hover14 column">
                     <div class="agile_top_brand_left_grid">
-                        <div class="tag"><img src="{{product.image.url}}" alt=" " class="img-responsive"></div>
                         <div class="agile_top_brand_left_grid1">
                             <figure>
                                 <div class="snipcart-item block">
                                     <div class="snipcart-thumb">
-                                        <a href="{% url 'product' product.id %}"><img title=" " alt=" " src="{{ product.image.url }}"></a>
+                                        <a href="{% url 'product' product.id %}"><img title=" " alt=" " src="{{ product.image.url }}" height="200"/></a>
                                         <p>{{ product.name}}</p>
                                         <h4>N{{product.selling_price}}</h4>
                                     </div>
                                     <div class="snipcart-details top_brand_home_details">
-                                        <form action="checkout.html" method="post">
+                                        <form action="{% url 'storeroom' %}" method="post">
                                             <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart">
-                                                <input type="hidden" name="add" value="1">
                                                 <input type="hidden" name="item_name" value="{{ product.name}}">
-                                                <input type="hidden" name="amount" value="{{ product.selling_price }}">
                                                 <input type="submit" name="submit" value="Add to cart" class="button">
                                             </fieldset>
 
@@ -707,5 +705,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 
 
-<a href="#" id="toTop" style="display: none;"><span id="toTopHover"></span>To Top</a></body>
+<a href="#" id="toTop" style="display: none;">
+    <span id="toTopHover">
+
+</span>To Top</a>
+</body>
 </html>

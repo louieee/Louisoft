@@ -13,4 +13,6 @@ urlpatterns = [
     path('logistics/<order>', logistics, name="logistics"),
     path('', home, name="anonymous_home"),
     path("product/<int:id_>", show_single_product, name="product"),
+    path('block/<name>', block_client, name="block_client"),
+    path('dismiss/<name>', dismiss_client, name="dismiss_client")
 ]

@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from Anonymous.models import Chat, Consultant, Product, Order
+from Anonymous.models import Chat, Consultant, Product, Order, Testimonial, Message
 from Anonymous.util import fetch_ip_address, generate_username, new_day
 
 DISMISSED, BLOCKED, WRONG_URL, WAIT, NOT_ALLOWED = range(5)
@@ -32,39 +32,41 @@ def _404(request, reason):
 
 def enter_the_chat(request):
 	if request.method == 'GET':
-		consultant = request.GET['consultant']
-		_consultant = Consultant.objects.filter(code=consultant).first()
-		if _consultant is None:
-			return redirect('404', reason=WRONG_URL)
-		ip_address = fetch_ip_address(request)
-		blocked = _consultant.__blocked__()
-		if ip_address in blocked:
-			return redirect('404', reason=BLOCKED)
-		if new_day(_consultant.date):
-			_consultant.date = datetime.now().date()
-			_consultant.visitors = '[]'
-			_consultant.dismissed = '[]'
-			_consultant.save()
-		visitors = _consultant.__visitors__()
-		dismissed = _consultant.__dismissed__()
-		if len(visitors) >= _consultant.limit:
-			return redirect('404', reason=WAIT)
-		if ip_address in dismissed:
-			return redirect('404', reason=DISMISSED)
-		try:
-			anon_chat = Chat.objects.get(Q(ip_address=ip_address) & Q(consultant=_consultant))
-		except Chat.DoesNotExist:
-			anon_chat = Chat.objects.create(ip_address=ip_address,
-											name=generate_username('Anonymous'),
-											consultant=_consultant)
+		if not request.user.is_authenticated:
+			consultant = request.GET['consultant']
+			_consultant = Consultant.objects.filter(code=consultant).first()
+			if _consultant is None:
+				return redirect('404', reason=WRONG_URL)
+			ip_address = fetch_ip_address(request)
+			blocked = _consultant.__blocked__()
+			if ip_address in blocked:
+				return redirect('404', reason=BLOCKED)
+			if new_day(_consultant.date):
+				_consultant.date = datetime.now().date()
+				_consultant.visitors = '[]'
+				_consultant.dismissed = '[]'
+				_consultant.save()
+			visitors = _consultant.__visitors__()
+			dismissed = _consultant.__dismissed__()
+			if len(visitors) >= _consultant.limit:
+				return redirect('404', reason=WAIT)
+			if ip_address in dismissed:
+				return redirect('404', reason=DISMISSED)
+			anon_chat = Chat.objects.filter(Q(ip_address=ip_address) & Q(consultant=_consultant)).first()
+			if anon_chat is None:
+				anon_chat = Chat.objects.create(ip_address=ip_address,
+												name=generate_username('Anonymous'),
+												consultant=_consultant)
 
-		anon_chat.admitted = True
-		anon_chat.chats()
-		anon_chat.save()
-		visitors.append(ip_address)
-		_consultant.visitors = json.dumps(visitors)
-		_consultant.save()
-		return redirect('chat', name=anon_chat)
+			anon_chat.admitted = True
+			anon_chat.chats()
+			anon_chat.save()
+			visitors.append(ip_address)
+			_consultant.visitors = json.dumps(list(set(visitors)))
+			_consultant.save()
+			return redirect('chat', name=anon_chat.name)
+		else:
+			return redirect('chats')
 
 
 def chat(request, name):
@@ -78,22 +80,29 @@ def chat(request, name):
 			return redirect('404', reason=DISMISSED)
 		if chat_session.ip_address in consultant.__blocked__():
 			return redirect('404', reason=BLOCKED)
-		return render(request, 'Louisoft/Anonymous/chat.html', {"name": name})
+		context = {"name": name, "consultant": consultant, "chat": chat_session}
+		if request.user.is_authenticated:
+			context['authenticated'] = True
+		return render(request, 'Louisoft/Anonymous/chat.html', context)
+	if request.method == 'POST':
+		message = request.POST.get('message', False)
+		chat = Chat.objects.get(name=name)
+		if message:
+			if request.user.is_authenticated:
+				consultant = True
+			else:
+				consultant = False
+			Message.objects.create(chat=chat, text=message, consultant=consultant, send_status=Message.SENT)
+			return redirect('chat', name=name)
 
 
 def chats(request):
-	if request.method == 'GET':
-		return render(request, 'Louisoft/Anonymous/chats.html')
+	if request.method == 'GET' and request.user.is_authenticated:
 
-
-def get_chat(request):
-	if request.method == 'GET':
-		name = request.GET.get('name')
-		try:
-			anon_chat = Chat.objects.get(name=name)
-			return json.dumps(anon_chat.chats())
-		except Chat.DoesNotExist:
-			return json.dumps({})
+		chats = Chat.objects.filter(consultant__user_id=request.user.id, admitted=True)
+		return render(request, 'Louisoft/Anonymous/chats.html', {"chats": chats})
+	else:
+		return redirect('404', reason=WRONG_URL)
 
 
 def get_chats(request):
@@ -105,16 +114,17 @@ def get_chats(request):
 def store_room(request):
 	if request.method == 'GET':
 		category = request.GET.get('category', None)
-		ip_address = fetch_ip_address(request)
-		try:
-			chat_session = Chat.objects.get(ip_address=ip_address)
-			consultant = chat_session.consultant
-			if chat_session.ip_address in consultant.__dismissed__():
-				return redirect('404', reason=DISMISSED)
-			if chat_session.ip_address in consultant.__blocked__():
-				return redirect('404', reason=BLOCKED)
-		except Chat.DoesNotExist:
-			return redirect('404', reason=NOT_ALLOWED)
+		if not request.user.is_authenticated:
+			ip_address = fetch_ip_address(request)
+			try:
+				chat_session = Chat.objects.get(ip_address=ip_address)
+				consultant = chat_session.consultant
+				if chat_session.ip_address in consultant.__dismissed__():
+					return redirect('404', reason=DISMISSED)
+				if chat_session.ip_address in consultant.__blocked__():
+					return redirect('404', reason=BLOCKED)
+			except Chat.DoesNotExist:
+				return redirect('404', reason=NOT_ALLOWED)
 		products = None
 		if category is not None:
 			category = dict(Product.CATEGORIES)[category]
@@ -138,17 +148,21 @@ def make_order(request):
 
 
 def home(request):
-	return render(request, 'Louisoft/Anonymous/home.html')
+	testimonials = Testimonial.objects.order_by('-id').all()[:5]
+	return render(request, 'Louisoft/Anonymous/home.html', {"testimonials": testimonials,
+															"count": (x for x in range(1, 6))})
 
 
 def logistics(request, order):
 	if request.method == 'GET':
-		return render(request, 'Louisoft/Anonymous/order.html')
+		order = Order.objects.get(id=order)
+		return render(request, 'Louisoft/Anonymous/order.html', {"order": order})
 
 
 def show_order(request, order):
 	if request.method == 'GET':
-		return render(request, 'Louisoft/Anonymous/checkout.html', {"order": order})
+		context = Order.objects.get(id=order).receipt()
+		return render(request, 'Louisoft/Anonymous/checkout.html', context)
 
 
 def get_receipt(request):
@@ -179,3 +193,17 @@ def dismiss(chat):
 def show_single_product(request, id_):
 	product = Product.objects.get(id=id_)
 	return render(request, 'Louisoft/Anonymous/single.html', {"product": product})
+
+
+def dismiss_client(request, name):
+	if request.method == 'GET':
+		chat = Chat.objects.get(name=name)
+		dismiss(chat)
+		return redirect('chats')
+
+
+def block_client(request, name):
+	if request.method == 'GET':
+		chat = Chat.objects.get(name=name)
+		block(chat)
+		return redirect('chats')
