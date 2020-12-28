@@ -1,7 +1,7 @@
 {% load static %}
 <html>
 <head>
-    <title>Health an Sports Category Flat Bootstarp responsive Website Template| Home :: w3layouts</title>
+    <title>Consult - Anonymous Health Consultant</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="keywords" content="Health Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
@@ -24,13 +24,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900" rel="stylesheet"
           type="text/css">
+    <link rel="icon" href="{% static 'Chat/media/img/favicon.png' %}" type="image/png">
 </head>
 <body>
 <div class="header">
     <div class="header-top">
         <div class="container">
             <div class="logo">
-                <a href="{% url 'anonymous_home' %}"><img src="{% static 'Home/images/logo.png' %}" alt=""></a>
+                <a href="{% url 'anonymous_home' %}">
+                    <h1 class="text-warning font-bold"
+                        style="color: rgba(255,208,11,0.93); font-weight: bold">
+                        Cons<span class="text-primary">ult</span></h1>
+                </a>
             </div>
 
             <div class="clearfix"></div>
@@ -103,22 +108,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </ul>
             </div>
         </section>
-    </div>
-</div>
-<div class="footer">
-    <div class="container row">
-        <div class="col-md-12 contact_grid text-center">
-            <h3>Contact us</h3>
-            <p>500 Lorem Ipsum Dolor Sit,</p>
-            <p>22-56-2-9 Sit Amet, Lorem,</p>
-            <p>USA</p>
-            <p>Phone:(00) 222 666 444</p>
-            <p>Fax: (000) 000 00 00 0</p>
-            <p>Email : <a href="malito:mail@demolink.org">mail(at)Health.com</a></p>
-        </div>
-        <div class="clearfix"></div>
-        <p class="copy">Copyright © 2015 Health. All Rights Reserved. Design by <a href="http://w3layouts.com/"
-                                                                                   target="_blank">W3layouts</a></p>
     </div>
 </div>
 <!-- FlexSlider -->

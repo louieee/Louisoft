@@ -213,7 +213,7 @@ def dismiss(chat):
 	chat.consultant.save()
 
 
-def show_single_product(request, id_):
+def show_single_product(request, name):
 	if request.method == 'GET':
 		context = {}
 		if not request.user.is_authenticated:
@@ -222,7 +222,7 @@ def show_single_product(request, id_):
 			if chat is None:
 				return redirect('404', reason=WRONG_URL)
 			context['chat'] = chat
-		product = Product.objects.get(id=id_)
+		product = Product.objects.get(name=name)
 		context['product'] = product
 		return render(request, 'Louisoft/Anonymous/single.html', context)
 
