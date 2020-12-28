@@ -782,57 +782,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <h3>Chec<span>kout</span></h3>
 
         <div class="checkout-right">
-            <h4>Your shopping cart contains: <span>3 Products</span></h4>
+            <h4>Your shopping cart contains: <span>{{ no_of_products }} Products</span></h4>
             <table class="timetable_sub">
                 <thead>
                 <tr>
-                    <th>SL No.</th>
                     <th>Product</th>
                     <th>Quality</th>
-                    <th>Product Name</th>
-
                     <th>Price</th>
-                    <th>Remove</th>
+                    <th>Total Price</th>
+
                 </tr>
                 </thead>
                 <tbody>
-                {% for order in orders %}
+                {% for name,quantity, selling_price, total_price in rows %}
                 <tr class="rem1">
-                    <td class="invert">1</td>
-                    <td class="invert-image"><a href="single.html"><img src="{% static 'Store/images/1.png' %}" alt=" "
-                                                                        class="img-responsive"></a></td>
-                    <td class="invert">
-                        <div class="quantity">
-                            <div class="quantity-select">
-                                <div class="entry value-minus">&nbsp;</div>
-                                <div class="entry value"><span>1</span></div>
-                                <div class="entry value-plus active">&nbsp;</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="invert">Fortune Sunflower Oil</td>
+                     <td class="invert">{{ name}}</td>
+                    <td class="invert">{{ quantity }}</td>
 
-                    <td class="invert">$290.00</td>
-                    <td class="invert">
-                        <div class="rem">
-                            <div class="close1"></div>
-                        </div>
+                    <td class="invert">N {{selling_price}}</td>
+                    <td class="invert">N {{total_price}}</td>
 
-                    </td>
                 </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
-        <div class="checkout-left">
+        <a class="checkout-left">
             <div class="col-md-4 checkout-left-basket">
 
                 <ul>
 
 
-                    <li>Total <i>-</i> <span>N 84.00</span></li>
+                    <li>Total <i>-</i> <span>N {{ grand_total }}</span></li>
                 </ul>
-                <h4>Continue to basket</h4></div>
+                <a href="{% url 'logistics' %}"><h4>Continue to basket</h4></a>
+                </div>
 
 
         </div>

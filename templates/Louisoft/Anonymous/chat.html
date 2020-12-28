@@ -7674,7 +7674,7 @@
 
                     {% if authenticated %}
                         <li class="list-inline-item show">
-                            <a href="{% url 'block_client' name%}" class="btn btn-dark btn-floating" title="Block Client">
+                            <a id="block" class="btn btn-dark btn-floating" title="Block Client">
                                 <i class="mdi mdi-lock"></i>
                             </a>
                         </li>
@@ -7686,7 +7686,7 @@
                     </li>
                     {% if authenticated %}
                         <li class="list-inline-item show">
-                            <a href="{% url 'dismiss_client' name %}" class="btn btn-dark btn-floating" title="Dismiss Client">
+                            <a id="dismiss" class="btn btn-dark btn-floating" title="Dismiss Client">
                                 <i class="mdi mdi-door-open"></i>
                             </a>
                         </li>
@@ -7697,33 +7697,48 @@
         </div>
         <div class="chat-body ps parent ps--active-y" id="chat_body">
                 <div class="messages child" id="messages_">
-                    {% for message in chat.messages %}
+                    {% for message in messages %}
                         {% if message.consultant %}
-                            <div class="message-item">
+                            <div id="msg_{{ message.id }}" class="message-item
+                             in  {% if not authenticated %} {{ message.status }} {% endif %}">
                             <div class="message-avatar">
                                 <figure class="avatar avatar-sm">
                                     <img src="{% static 'Chat/media/img/avatar6.jpg' %}" class="rounded-circle" alt="image">
                                 </figure>
                                 <div>
                                     <h5>{{ consultant.code }}</h5>
-                                    <div class="time">{{ message.time}}</div>
+                                    <div class="time">{{ message.time}}
+                                        {% if authenticated %}
+                                                <i id="msg_status_{{ message.id }}" class="mdi
+                                                {% if message.send_status == message.DELIVERED %}
+                                                mdi-check-all
+                                                {% else %}
+                                                mdi-check
+                                                {% endif %}
+                                                text-info ml-1"></i>
+                                    {% endif %}
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="message-content">
-                                <div class="message-text">{{ message.text }}</div>
+                                <div class="message-text">{{ message.decrypted_text }}</div>
                                 <div class="dropdown">
                                     <a href="#" data-toggle="dropdown">
                                         <i class="mdi mdi-dots-horizontal"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a href="#" class="dropdown-item">Delete for Everyone</a>
-                                        <a href="#" class="dropdown-item example-delete-message">Delete for Me</a>
+                                        {% if authenticated and not message.expired %}
+                                            <a onclick="delete_({{ message.id }})" class="dropdown-item">Delete for Everyone</a>
+                                        {% endif %}
+                                        <a onclick="delete_4_me({{ message.id }})" class="dropdown-item example-delete-message">Delete for Me</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {% else %}
-                            <div class="message-item out">
+                            <div id="msg_{{ message.id }}" class="message-item
+                            out {% if authenticated %} {{ message.status }} {% endif %}">
                                 <div class="message-avatar">
                                     <figure class="avatar avatar-sm">
                                         <img src="{% static 'Chat/media/img/avatar9.jpg' %}" class="rounded-circle" alt="image">
@@ -7731,26 +7746,31 @@
                                     <div>
                                         <h5>{{ name }}</h5>
                                         <div class="time">{{ message.time }}
-                                            {% if message.send_status == message.DELIVERED %}
-                                                <i class="mdi mdi-check-all text-info ml-1"></i>
-                                            {% endif %}
+                                             {% if not authenticated %}
+                                                <i id="msg_status_{{ message.id }}" class="mdi
+                                                {% if message.send_status == message.DELIVERED %}
+                                                mdi-check-all
+                                                {% else %}
+                                                mdi-check
+                                                {% endif %}
+                                                text-info ml-1"></i>
+                                    {% endif %}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="message-content">
                                     <div class="message-text">
-                                        {{ message.text }}
+                                        {{ message.decrypted_text }}
                                     </div>
                                     <div class="dropdown">
                                         <a href="#" data-toggle="dropdown">
                                             <i class="mdi mdi-dots-horizontal"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item">Reply</a>
-                                            <a href="#" class="dropdown-item">Forward</a>
-                                            <a href="#" class="dropdown-item">Copy</a>
-                                            <a href="#" class="dropdown-item">Starred</a>
-                                            <a href="#" class="dropdown-item example-delete-message">Delete</a>
+                                            {% if not authenticated and not message.expired %}
+                                                <a onclick="delete_({{ message.id }})"  class="dropdown-item example-delete-message">Delete for Everyone</a>
+                                            {% endif %}
+                                            <a onclick="delete_4_me({{ message.id }})" class="dropdown-item example-delete-message">Delete for Me</a>
                                         </div>
                                     </div>
                                 </div>
@@ -7760,7 +7780,7 @@
                 </div>
         </div>
         <div class="chat-footer" data-intro-js="6">
-            <form class="d-flex" method="post" action="{% url 'chat' name %}">
+            <form class="d-flex" id="form" method="post" action="{% url 'chat' name %}">
                 {% csrf_token %}
                 <div class="dropdown">
                     <button class="btn btn-light-info btn-floating mr-3" data-toggle="dropdown" title="Emoji"
@@ -8260,7 +8280,319 @@
 <script src="{% static 'Chat/vendor/sweetalert2.js' %}"></script>
 
 <!--put your script here-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js">
+  </script>
+  <script>
+      const loc = window.location
+      let wsStart = 'ws://'
+      if (loc.protocol === 'https:'){
+          wsStart = 'wss://';
+      }
+      const user = {% if authenticated %} 'consultant' {% else %} 'client' {% endif %}
+      const endpoint = wsStart + loc.host + '/consult/chat/{{chat.name}}'
+      const Socket = new WebSocket(endpoint)
+      const formdata = $('#form')
+      const msg = $('#message')
+      const chatlist = $('#messages_')
+      const block_btn = $('#block')
+      const dismiss_btn = $('#dismiss')
+      const in_msg =(data)=>{
+          let first_ =  '<div id="msg_'+data['message_id']+'" class="message-item in '
+          if (user === 'client'){
+              first_ = first_ + data['status']
+          }
+          first_ = first_ + '"><div class="message-avatar">\
+                                <figure class="avatar avatar-sm">\
+                                    <img src="{% static 'Chat/media/img/avatar6.jpg' %}" class="rounded-circle" alt="image">\
+                                </figure>\
+                                <div>\
+                                    <h5>'+data["name"]+'</h5>\
+                                    <div class="time">'+data['date']+ ' '+data['time']+'  '
+          if (user === 'consultant') {
+              if (data['status'] === 'delivered') {
+                  first_ = first_ + '<i id="msg_status_'+data['message_id']+'" class="mdi mdi-check-all text-info ml-1"></i>'
+              } else {
+                  first_ = first_ + '<i id="msg_status_'+data['message_id']+'" class="mdi mdi-check text-info ml-1"></i>'
+              }
+          }
+            first_ = first_ +    '</div></div>\
+                            </div>\
+                            <div class="message-content">\
+                                <div class="message-text">'+data['message']+'</div>\
+                                <div class="dropdown">\
+                                    <a href="#" data-toggle="dropdown">\
+                                        <i class="mdi mdi-dots-horizontal"></i>\
+                                    </a>\
+                                    <div class="dropdown-menu">'
+          let del_every =  '<a onclick="delete_('+data['message_id']+')" class="dropdown-item">Delete for Everyone</a>'
+          if (user === 'consultant' && data['expired'] === false){
+              first_ = first_ + del_every
+          }
+          return first_+ '<a onclick="delete_4_me('+data['message_id']+')" class="dropdown-item example-delete-message">Delete for Me</a>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </div>'
+      }
+      const out_msg =(data)=>{
+          let result = '<div id="msg_'+data['message_id']+'" class="message-item out '
+          if (user === 'consultant'){
+              result = result + data['status']
+          }
+          result = result + '"><div class="message-avatar">\
+                                    <figure class="avatar avatar-sm">\
+                                        <img src="{% static 'Chat/media/img/avatar9.jpg' %}" class="rounded-circle" alt="image">\
+                                    </figure>\
+                                    <div>\
+                                        <h5>'+data['name']+'</h5>\
+                                        <div class="time">'+data['date'] +' '+data['time']
+          if (user === 'client') {
+              if (data['status'] === 'delivered') {
+                  result = result + '<i id="msg_status_'+data['message_id']+'" class="mdi mdi-check-all text-info ml-1"></i>'
+              } else {
+                  result = result + '<i id="msg_status_'+data['message_id']+'" class="mdi mdi-check text-info ml-1"></i>'
+              }
+          }
+          result = result +  '</div>\
+                                    </div>\
+                                </div>\
+                                <div class="message-content">\
+                                    <div class="message-text">'+data['message']+'\
+                                    </div>\
+                                    <div class="dropdown">\
+                                        <a href="#" data-toggle="dropdown">\
+                                            <i class="mdi mdi-dots-horizontal"></i>\
+                                        </a>\
+                                        <div class="dropdown-menu dropdown-menu-right">'
+          const del_every = '<a onclick="delete_('+data['message_id']+')" class="dropdown-item example-delete-message">Delete for Everyone</a>'
+          if (user === 'client' && data['expired'] === false){
+              result = result + del_every
+          }
+          return result + '<a onclick="delete_4_me('+data['message_id']+')" class="dropdown-item example-delete-message">Delete for Me</a>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>'
+      }
 
+       const out_typing = '<div id="out_typing" class="message-item out in-typing">\
+                    <div class="message-content">\
+                        <div class="message-text">\
+                            <div class="writing-animation">\
+                                <div class="writing-animation-line"></div>\
+                                <div class="writing-animation-line"></div>\
+                                <div class="writing-animation-line"></div>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>'
+      const in_typing = '<div id="in_typing" class="message-item in in-typing">\
+                    <div class="message-content">\
+                        <div class="message-text">\
+                            <div class="writing-animation">\
+                                <div class="writing-animation-line"></div>\
+                                <div class="writing-animation-line"></div>\
+                                <div class="writing-animation-line"></div>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>'
+      Socket.onmessage = (e)=>{
+          const my_data = JSON.parse(e.data)
+          console.log("message", my_data)
+          if (my_data.sender !== user && my_data.function === 'isTyping'){
+              let d = document.getElementById('messages_')
+                d.scrollTo(0, d.scrollHeight);
+                if (user === 'consultant'){
+                    let st = document.getElementById('out_typing')
+                    let d = document.getElementById('messages_')
+                     d.scrollTo(0, d.scrollHeight);
+                    if (st === null)
+                        chatlist.append(out_typing)
+                }else if (user === 'client'){
+                    let st = document.getElementById('in_typing')
+                    let d = document.getElementById('messages_')
+                    d.scrollTo(0, d.scrollHeight);
+                    if (st === null)
+                        chatlist.append(in_typing)
+                }
+                d = document.getElementById('messages_')
+                d.scrollTo(0, d.scrollHeight);
+
+
+          }
+          if (my_data.sender !== user && my_data.function === 'NotTyping'){
+              const bucket = document.getElementById('messages_')
+                if (user === 'consultant'){
+                    let st = document.getElementById('out_typing')
+                    bucket.removeChild(st)
+                }else if (user === 'client'){
+                    let st = document.getElementById('in_typing')
+                    bucket.removeChild(st)
+                }
+
+
+          }
+          if (my_data.sender !== user && my_data.function === 'status'){
+              console.log('message delivered')
+              const status = document.querySelector('#msg_status'+my_data.message_id)
+              status.classList.replace('fa-check','fa-check-double')
+          }
+          if (my_data.function === 'delete'){
+              if (my_data.result === 'Deleted'){
+                let message =  document.querySelector('#msg_'+my_data['message_id'])
+                  message.classList.replace('message-item', 'd-none')
+              }
+
+          }
+          function check_status(data){
+              console.log('isDelivered: '+data)
+              const msg = document.querySelector('#msg_status_'+data);
+              msg.classList.replace('mdi-check','mdi-check-all')
+
+          }
+          if (my_data.sender !== user && my_data.function === 'isDelivered'){
+              check_status(my_data.message_id)
+          }
+          if (my_data.sender === user && my_data.function === 'isDelivered'){
+              document.querySelector('.msg_'+my_data.message_id).classList.replace('sent', 'delivered')
+          }
+
+          if (my_data.sender !== user  && my_data.function === 'message'){
+              if (user === 'client'){
+                  chatlist.append(in_msg(my_data))
+
+              }else if (user === 'consultant'){
+                  chatlist.append(out_msg(my_data))
+              }
+              let d = document.getElementById('messages_')
+              d.scrollTo(0, d.scrollHeight);
+              let data = {}
+            data.function = 'isDelivered'
+            data.sender = my_data.sender
+            data.message_id = my_data.message_id
+            data.sender = user
+            Socket.send(JSON.stringify(data))
+          }
+
+          if (my_data.sender === user  && my_data.function === 'message'){
+              if (user === 'client'){
+                  chatlist.append(out_msg(my_data))
+
+              }else if (user === 'consultant'){
+                  chatlist.append(in_msg(my_data))
+              }
+              let d = document.getElementById('messages_')
+              d.scrollTo(0, d.scrollHeight);
+          }
+          if (my_data.function === 'dismiss'){
+              if (user === 'consultant'){
+                  window.location.href='{% url 'chats' %}'
+              }
+              if (user === 'client'){
+                  const xmlHttp = new XMLHttpRequest();
+                      xmlHttp.onreadystatechange = function() {
+                      if (xmlHttp.readyState === 4 && xmlHttp.status === 200){
+                          window.location.href="{% url 'anonymous_home' %}"
+                      }
+                    }
+                      xmlHttp.open("GET","/consult/dismiss/"+my_data['chat'], true); // true for asynchronous
+                      xmlHttp.send(null);
+                }
+              }
+          if (my_data.function === 'block'){
+              if (user === 'consultant'){
+                  window.location.href = '{% url 'chats' %}'
+              }
+              if (user === 'client'){
+                  const xmlHttp = new XMLHttpRequest();
+                      xmlHttp.onreadystatechange = function() {
+                      if (xmlHttp.readyState === 4 && xmlHttp.status === 200){
+                          window.location.href="{% url 'anonymous_home' %}"
+                      }
+                    }
+                      xmlHttp.open("GET", "/consult/block/"+my_data['chat'], true); // true for asynchronous
+                      xmlHttp.send(null);
+                }
+      }
+      }
+      Socket.onopen = (e)=>{
+          {#tell other chat mate you have received their message#}
+          console.log("open", e)
+          const sent = document.querySelectorAll('.SENT')
+            let sent_list = []
+            sent.forEach((item)=>{ sent_list.push(Number(item.id.replace('msg_', '')))})
+            sent_list.forEach((item)=>{
+                let data = {}
+                data.message_id = item
+                data.function = 'isDelivered'
+                data.sender = user
+                Socket.send(JSON.stringify(data))
+            })
+
+            formdata.submit((e)=>{
+            e.preventDefault();
+            if (msg.val() !== ''){
+                let data = {}
+                data.sender = user
+                data.function = 'NotTyping'
+                Socket.send(JSON.stringify(data))
+                data.function = 'message'
+                data.message = msg.val()
+                Socket.send(JSON.stringify(data))
+                msg.val('')
+
+            }})
+            msg.on("focusin",(e)=>{
+                data = {}
+                data.function = 'isTyping'
+                data.sender = user
+                Socket.send(JSON.stringify(data))
+            })
+            msg.on("focusout", (e)=>{
+
+            })
+
+            block_btn.on('click', (e)=>{
+                data = {}
+                data.sender = {% if authenticated %}'consultant'{% else %}'client'{% endif %}
+                data.function = 'block'
+                Socket.send(JSON.stringify(data))
+            })
+
+            dismiss_btn.on('click', (e)=>{
+                data = {}
+                data.sender = {% if authenticated %}'consultant'{% else %}'client'{% endif %}
+                data.function = 'dismiss'
+                Socket.send(JSON.stringify(data))
+            })
+      }
+      Socket.onerror = (e)=>{
+          console.log("error", e)
+      }
+      Socket.onclose =(e)=>{
+          console.log("close", e)
+      }
+    window.scrollTo(0, document.getElementById('messages_').scrollHeight);
+    const delete_4_me =(id_)=>{
+        const xmlHttp = new XMLHttpRequest();
+          xmlHttp.onreadystatechange = function() {
+          if (xmlHttp.readyState === 4 && xmlHttp.status === 200){
+              document.getElementById('msg_'+id_).className="d-none"
+          }
+        }
+          xmlHttp.open("GET", '/consult/chat/{{ chat.id }}/message/'+id_+'/delete', true); // true for asynchronous
+          xmlHttp.send(null);
+    }
+
+    const delete_ = (id_) => {
+        data = {}
+        data.function = 'delete'
+        data.message_id = id_
+        data.sender = user
+        Socket.send(JSON.stringify(data))
+    }
+  </script>
 
 </body>
 </html>

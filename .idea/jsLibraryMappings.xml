@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{all, animate.css, aos, font-awesome, jquery, jquery-easing, twitter-bootstrap}" />
+    <file url="file://$PROJECT_DIR$" libraries="{all, animate.css, aos, font-awesome, inline, jquery, jquery-easing, twitter-bootstrap}" />
   </component>
 </project>

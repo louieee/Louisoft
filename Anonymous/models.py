@@ -18,9 +18,8 @@ class Chat(models.Model):
 	secret = models.BinaryField(default=Fernet.generate_key())
 	admitted = models.BooleanField(default=False)
 	blocked = models.BooleanField(default=False)
+	deleted_msg = models.TextField(default=json.dumps({"consultant": [], "client": []}))
 
-	def last_message(self):
-		return Message.objects.filter(chat=self).last()
 
 	def encrypt(self, data):
 		from cryptography.fernet import Fernet
@@ -36,8 +35,26 @@ class Chat(models.Model):
 	def number_of_unseen_msgs(self):
 		return Message.objects.filter(Q(chat=self) & Q(consultant=False) & Q(send_status=Message.SENT)).count()
 
-	def messages(self):
-		return Message.objects.filter(chat=self)
+	def deleted_msgs(self, user):
+		data = json.loads(self.deleted_msg)
+		return data[user]
+
+	def add_deleted_msg(self, user, id_):
+		data = json.loads(self.deleted_msg)
+		if id_ not in data[user]:
+			data[user].append(id_)
+		self.deleted_msg = json.dumps(data)
+		self.save()
+
+	def messages(self, user):
+		del_msgs = self.deleted_msgs(user)
+		return [msg for msg in Message.objects.filter(chat=self) if msg.id not in del_msgs]
+
+	def last_message(self, user):
+		data = self.messages(user)
+		data.reverse()
+		data = data[0]
+		return data
 
 
 class Message(models.Model):
@@ -49,6 +66,9 @@ class Message(models.Model):
 	image = models.ImageField(default=None, upload_to=f'{chat.name}/message/images', null=True, blank=True)
 	time = models.DateTimeField(auto_now=True)
 	send_status = models.PositiveSmallIntegerField(default=NOT_SENT, choices=STATUS)
+
+	def status(self):
+		return dict(self.STATUS)[self.send_status]
 
 	def __time__(self):
 		return self.time.strftime('%I : %M %p')
@@ -114,28 +134,29 @@ class Order(models.Model):
 	chat = models.ForeignKey('Anonymous.Chat', on_delete=models.CASCADE, default=None)
 	mode_of_payment = models.PositiveSmallIntegerField(default=OFFLINE, choices=MODE_OF_PAYMENT)
 	address = models.CharField(default='', max_length=225)
-	phone = models.CharField(default=None, max_length=15)
+	phone = models.CharField(default=None, max_length=15, null=True)
+	email = models.EmailField(default=None, null=True, blank=True)
 	date_of_order = models.DateTimeField(auto_now=True)
-	date_of_payment = models.DateTimeField(default=None)
+	date_of_payment = models.DateTimeField(default=None, null=True, blank=True)
 
 	def total_price(self):
 		orders = json.loads(self.orders)
-		return sum((Product.objects.get(name=item).selling_price * orders[item] for item in json.loads(self.orders)))
+		return sum((Product.objects.get(name=item).selling_price * int(orders[item]) for item in orders))
 
 	def total_profit(self):
 		orders = json.loads(self.orders)
-		return sum((Product.objects.get(name=item).profit() * orders[item] for item in self.orders))
+		return sum((Product.objects.get(name=item).profit() * orders[item] for item in orders))
 
 	def receipt(self):
 		orders = json.loads(self.orders)
-		orders = [{"name": item, "price": Product.objects.get(name=item).selling_price,
-				   "quantity": orders[item]}
-				  for item in orders]
-		total_prices = [{"product": item, "total": item['price'] * item['quantity']} for item in orders]
-		total_price = sum((item['total'] for item in total_prices))
-		return {"date": self.date_of_order.strftime('%A, %b %e %Y'),
-				"time": self.date_of_order.strftime('%I : #M %p'),
-				"orders": list(orders.items()), "total_prices": total_prices, "total_price": total_price}
+		name = [item for item in orders]
+		quantity = [orders[item] for item in orders]
+		selling_price = [Product.objects.get(name=item).selling_price for item in orders]
+		total_price = [a * b for a, b in zip(selling_price, quantity)]
+		row = zip(name, quantity, selling_price, total_price)
+		grand_total_price = sum(total_price)
+		return {"date": self.date_of_order.strftime('%A, %b %e %Y'), "time": self.date_of_order.strftime('%I : #M %p'),
+				"rows": row, "grand_total": grand_total_price, "no_of_products": len(orders)}
 
 
 class Testimonial(models.Model):

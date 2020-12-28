@@ -26,6 +26,7 @@
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="twitter-bootstrap" level="application" />
     <orderEntry type="library" name="jquery-easing" level="application" />
+    <orderEntry type="library" name="inline" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

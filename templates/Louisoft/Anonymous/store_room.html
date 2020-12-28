@@ -557,12 +557,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     });
 </script>
+<script>
+    (function() {
+        if (window.localStorage.getItem("{{ chat.name }}") === null) {
+            const cart = {}
+            window.localStorage.setItem("{{ chat.name }}", JSON.stringify(cart))
+        }
+    })();
 
+</script>
 <!-- top-brands -->
 <div class="top-brands">
     <div class="container">
-        <h3 class="mb-5">Hot Offers</h3>
-        <button class="btn btn-pulse btn-primary mt-5">Checkout</button>
+        <h3 class="mb-5">Our Products</h3>
+        <script>
+            const checkout = ()=>{
+                const cart = window.localStorage.getItem("{{ chat.name }}")
+                $.ajax(
+                    {url : "{% url 'make_order' %}",
+                    type: 'GET', data: {"cart": cart, "chat_name": "{{ chat.name }}"}, json: true,
+                        success: (data)=>{
+                            window.location.href = '/consult/checkout'
+                        }
+                    }
+                );
+            }
+
+        </script>
+        <button type="button" onclick="checkout()" class="btn btn-pulse btn-primary mt-5">Checkout</button>
 
         <div class="agile_top_brands_grids">
             {% for product in products %}
@@ -580,8 +602,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <div class="snipcart-details top_brand_home_details">
                                         <form action="{% url 'storeroom' %}" method="post">
                                             <fieldset>
-                                                <input type="hidden" name="item_name" value="{{ product.name}}">
-                                                <input type="submit" name="submit" value="Add to cart" class="button">
+                                                <script>
+                                                    const action_cart = (element, action)=>{
+                                                        const cart = JSON.parse(window.localStorage.getItem("{{ chat.name }}"));
+                                                        if  (element.name in cart){
+                                                            if(action === 'add'){
+                                                                cart[element.name] = cart[element.name] + 1;
+                                                            }else if (action === 'remove'){
+                                                                if (cart[element.name] !== 0) {
+                                                                    cart[element.name] = cart[element.name] - 1;
+                                                                }
+                                                            }
+                                                        }else{
+                                                            if (action === 'add'){
+                                                                cart[element.name] = 1
+                                                            }
+                                                        }
+                                                        window.localStorage.setItem("{{ chat.name }}", JSON.stringify(cart))
+                                                    }
+                                                </script>
+                                                <input type="button" name="{{ product.name }}" onclick="action_cart(this, 'add')" value="Add to cart" class="button">
+                                                <br/><br/>
+                                                <input type="button" name="{{ product.name }}" onclick="action_cart(this, 'remove')" value="Remove from cart" class="btn">
                                             </fieldset>
 
                                         </form>

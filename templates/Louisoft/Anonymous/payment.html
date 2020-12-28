@@ -1,0 +1,78 @@
+{% load static %}
+<html>
+<head>
+    <title>Payment :: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="keywords"
+          content="Order Tracking Form Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+
+    <!-- //custom css file -->
+    <link rel="stylesheet" href="{% static 'Home/css/bootstrap.css' %}">
+    <!-- custom css file -->
+    <link rel="stylesheet" href="{% static 'Order/css/style.css' %}">
+
+
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic"
+          rel="stylesheet" type="text/css">
+    <!-- //google fonts -->
+
+</head>
+
+<body>
+<h1 class="text-center">Payment</h1>
+<div class="agile-its">
+    <div class="w3layouts">
+        <div class="photos-upload-view">
+            <form>
+                <script src="{% static 'Home/js/jquery.min.js' %}"></script>
+                <script src="https://js.paystack.co/v1/inline.js"></script>
+                <script>
+                    const payWithPaystack = () =>{
+                        $.ajax({
+                            url: "{% url 'get_details' %}",
+                            type: "GET",
+                            json: true,
+                            success: (data)=>{
+                                const handler = PaystackPop.setup({
+                            key: data['key'],
+                            email: data['email'],
+                            amount: data['amount'],
+                            ref : data['txn_ref'],
+                            callback: (response)=>{
+                                alert('Transaction with Reference: '+response+' is successful')
+                            },
+                            onclose: ()=>{
+                                window.location.href = "{% url 'logistics' %}"
+                            }
+                        });
+                                handler.openIframe();
+                            }
+                        })
+
+                    }
+                </script>
+                <div class="wthree-text">
+                    <p class="text-center text-white" style="color: rgba(255,255,255,255)"> Click Below to pay with paystack and after which you will be contacted about
+                    your Order.</p>
+                    <div class="text-center">
+                        <a  class="btn btn-primary btn-lg btn-block" onclick="payWithPaystack()">Pay</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+</body>
+</html>

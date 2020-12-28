@@ -8,7 +8,7 @@ from Anonymous.consumers import ChatConsumer
 application = ProtocolTypeRouter({
     'websocket': AllowedHostsOriginValidator(AuthMiddlewareStack(URLRouter([
         
-            path('chat/', ChatConsumer),
+            path('consult/chat/<name>', ChatConsumer),
         
     ])))
 })

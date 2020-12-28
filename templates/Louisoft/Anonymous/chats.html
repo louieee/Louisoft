@@ -7657,7 +7657,7 @@
                 <ul class="list-group child list-group-flush ">
                     {% for chat in chats %}
                     <li class="list-group-item
-                    {% if chat.number_of_unseen_msgs > 0 %}
+                    {% if chat.chat.number_of_unseen_msgs > 0 %}
                     unread-chat
                     {% endif %}
                         ">
@@ -7668,14 +7668,14 @@
                         </div>
                         <div class="users-list-body">
                             <div>
-                                <h5><a href="{% url 'chat' chat.name %}">{{ chat.name }}</a></h5>
-                                <p>{{ chat.last_message.text }}</p>
+                                <h5><a href="{% url 'chat' chat.chat.name %}">{{ chat.chat.name }}</a></h5>
+                                <p>{{ chat.chat.last_message.text }}</p>
                             </div>
                             <div class="users-list-action">
-                                {% if chat.number_of_unseen_msgs > 0 %}
-                                    <div class="new-message-count">{{ chat.number_of_unseen_msgs }}</div>
+                                {% if chat.chat.number_of_unseen_msgs > 0 %}
+                                    <div class="new-message-count">{{ chat.chat.number_of_unseen_msgs }}</div>
                                 {% endif %}
-                                <small class="text-muted">{{ chat.last_message.time }}</small>
+                                <small class="text-muted">{{ chat.time }}</small>
                                 <div class="action-toggle">
                                     <div class="dropdown">
                                         <a data-toggle="dropdown" href="#">
