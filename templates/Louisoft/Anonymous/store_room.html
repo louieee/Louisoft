@@ -604,13 +604,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             <fieldset>
                                                 <script>
                                                     const action_cart = (element, action)=>{
+                                                        const tab = document.getElementById(element.name)
                                                         const cart = JSON.parse(window.localStorage.getItem("{{ chat.name }}"));
                                                         if  (element.name in cart){
                                                             if(action === 'add'){
                                                                 cart[element.name] = cart[element.name] + 1;
+
                                                             }else if (action === 'remove'){
                                                                 if (cart[element.name] !== 0) {
                                                                     cart[element.name] = cart[element.name] - 1;
+
                                                                 }
                                                             }
                                                         }else{
@@ -619,9 +622,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                             }
                                                         }
                                                         window.localStorage.setItem("{{ chat.name }}", JSON.stringify(cart))
+                                                        if (cart[element.name] === 0){
+                                                            tab.value = 'Add To Cart'
+                                                        }else {
+                                                            tab.value = 'Add ' + cart[element.name] +' to Cart'
+                                                        }
                                                     }
                                                 </script>
-                                                <input type="button" name="{{ product.name }}" onclick="action_cart(this, 'add')" value="Add to cart" class="button">
+                                                <input id="{{ product.name }}" type="button" name="{{ product.name }}" onclick="action_cart(this, 'add')" value="Add to cart" class="button">
                                                 <br/><br/>
                                                 <input type="button" name="{{ product.name }}" onclick="action_cart(this, 'remove')" value="Remove from cart" class="btn">
                                             </fieldset>

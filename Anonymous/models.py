@@ -138,6 +138,7 @@ class Order(models.Model):
 	email = models.EmailField(default=None, null=True, blank=True)
 	date_of_order = models.DateTimeField(auto_now=True)
 	date_of_payment = models.DateTimeField(default=None, null=True, blank=True)
+	evidence = models.ImageField(upload_to='Evidence', default=None, blank=True, null=True)
 
 	def total_price(self):
 		orders = json.loads(self.orders)

@@ -1,0 +1,74 @@
+{% load static %}
+<html>
+<head>
+    <title>Payment :: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="keywords"
+          content="Order Tracking Form Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+
+    <!-- //custom css file -->
+    <!-- custom css file -->
+     <link rel="stylesheet" href="{% static 'Home/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'Order/css/style.css' %}">
+
+
+
+
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic"
+          rel="stylesheet" type="text/css">
+    <!-- //google fonts -->
+
+</head>
+
+<body>
+<h1 class="text-center">Payment</h1>
+<div class="agile-its">
+    <div class="w3layouts">
+        <div class="photos-upload-view">
+            <script>
+                const upload = (element)=>{
+                            const evidence = document.getElementById('evidence')
+                            const form = document.getElementById('the_form')
+                            if (evidence.value === ''){
+                                evidence.click()
+                                element.innerText = 'Submit'
+                            }else{
+                                form.submit()
+                            }
+                        }
+            </script>
+                <div class="wthree-text">
+                    {% if saved %}
+                        <p class="text-center text-white" style="color: rgba(255,255,255,255)">
+                            Your Evidence will be reviewed and you will be contacted concerning your order. <br>
+                            Thank you for patronizing us.
+                        </p>
+                    {% else %}
+                    <p class="text-center text-white" style="color: rgba(255,255,255,255)">
+                        Send Payment to 3099717736 <br> Ohaegbu Louis Uzochukwu. <br>First Bank of Nigeria.</p>
+                    <p class="text-center text-white" style="color: rgba(255,255,255,255)">Then Upload Payment evidence right here</p>
+                    <form id="the_form" method="post" action="{% url 'payment' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input id="evidence" accept="image/*" class="form-control" type="file" name="evidence" value=''>
+                        <a onclick="upload(this)"  class="btn btn-primary btn-lg btn-block">Upload</a>
+                    </form>
+                    {% endif %}
+
+                </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+</body>
+</html>

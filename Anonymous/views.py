@@ -259,7 +259,21 @@ def webhook(request):
 
 
 def redirect_payment(request):
-	return render(request, 'Louisoft/Anonymous/payment.html')
+	order = Order.objects.get(id=request.session['order_id'])
+	if request.method == 'GET':
+		return render(request, 'Louisoft/Anonymous/payment2.html')
+	if request.method == 'POST':
+		evidence = request.FILES.get('evidence', False)
+		print(request.FILES)
+		if evidence:
+			order.evidence = evidence
+			order.save()
+			return render(request, 'Louisoft/Anonymous/payment2.html', {"saved": True})
+		else:
+			return redirect('payment')
+
+
+
 
 
 def get_details(request):
