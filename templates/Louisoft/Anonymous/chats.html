@@ -7655,9 +7655,9 @@
         <div class="left-sidebar-content ps ps--active-y">
             <div class="parent">
                 <ul class="list-group child list-group-flush ">
-                    {% for chat in chats %}
+                    {% for chat, msg in chats %}
                     <li class="list-group-item
-                    {% if chat.chat.number_of_unseen_msgs > 0 %}
+                    {% if chat.number_of_unseen_msgs > 0 %}
                     unread-chat
                     {% endif %}
                         ">
@@ -7668,27 +7668,23 @@
                         </div>
                         <div class="users-list-body">
                             <div>
-                                <h5><a href="{% url 'chat' chat.chat.name %}">{{ chat.chat.name }}</a></h5>
-                                <p>{{ chat.chat.last_message.text }}</p>
+                                <h5><a href="{% url 'chat' chat.name %}">{{ chat.name }}</a></h5>
+                                {% if msg is not None %}
+                                <p>{{ msg.decrypted_text }}</p>
+                                {% endif %}
                             </div>
                             <div class="users-list-action">
-                                {% if chat.chat.number_of_unseen_msgs > 0 %}
-                                    <div class="new-message-count">{{ chat.chat.number_of_unseen_msgs }}</div>
+                                {% if chat.number_of_unseen_msgs > 0 %}
+                                    <div class="new-message-count">{{ chat.number_of_unseen_msgs }}</div>
                                 {% endif %}
-                                <small class="text-muted">{{ chat.time }}</small>
+                                {% if msg is not None %}
+                                    <small class="text-muted">{{ msg.time }}</small>
+                                {% endif %}
                                 <div class="action-toggle">
                                     <div class="dropdown">
-                                        <a data-toggle="dropdown" href="#">
+                                        <a data-toggle="dropdown" href="{% url 'anonymous_home' %}">
                                             <i class="mdi mdi-dots-horizontal"></i>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item">Open</a>
-                                            <a href="#" data-right-sidebar="user-profile"
-                                               class="dropdown-item">Profile</a>
-                                            <a href="#" class="dropdown-item">Add to archive</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="#" class="dropdown-item text-danger example-delete-chat">Delete</a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

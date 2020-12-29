@@ -53,8 +53,9 @@ class Chat(models.Model):
 	def last_message(self, user):
 		data = self.messages(user)
 		data.reverse()
-		data = data[0]
-		return data
+		if data.__len__() == 0:
+			return None
+		return data[0]
 
 
 class Message(models.Model):

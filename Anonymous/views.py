@@ -95,8 +95,9 @@ def chat(request, name):
 def chats(request):
 	if request.method == 'GET' and request.user.is_authenticated:
 
-		chats_ = Chat.objects.filter(consultant__user_id=request.user.id, admitted=True)
-		chats_ = (chat.last_message('consultant') for chat in chats_)
+		chats = Chat.objects.filter(consultant__user_id=request.user.id, admitted=True)
+		chats_ = (chat.last_message('consultant') for chat in chats)
+		chats_ = zip(chats, chats_)
 		return render(request, 'Louisoft/Anonymous/chats.html', {"chats": chats_})
 	else:
 		return redirect('404', reason=WRONG_URL)

@@ -7667,7 +7667,8 @@
             <div class="chat-header-action">
                 <ul class="list-inline" data-intro-js="7">
                     <li class="list-inline-item d-inline d-lg-none">
-                        <a href="#" class="btn btn-danger btn-floating example-chat-close">
+                        <a href={% if authenticated %}"{% url 'chats' %}" {% else %}"{% url 'anonymous_home' %}"{% endif %}
+                           class="btn btn-danger btn-floating example-chat-close">
                             <i class="mdi mdi-arrow-left"></i>
                         </a>
                     </li>
