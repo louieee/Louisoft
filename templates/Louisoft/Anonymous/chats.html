@@ -7611,27 +7611,12 @@
     <nav class="navigation">
         <div class="nav-group">
             <ul>
-                <li class="logo">
-                    <a href="#">
-                        <img src="{% static 'Chat/mediia/img/logo.png' %}" alt="logo">
-                    </a>
-                </li>
-                <li data-toggle="tooltip" title="" data-placement="right" data-original-title="User menu" class="">
-                    <a href="login.html" data-intro-js="3" data-toggle="dropdown" aria-expanded="false">
-                        <figure class="avatar avatar-sm">
-                            <img src="{% static 'Chat/mediia/img/avatar9.jpg' %}" class="rounded-circle" alt="image">
-                        </figure>
-                    </a>
-                    <div class="dropdown-menu" style="">
-                        <a href="#" class="dropdown-item" data-toggle="modal" data-target="#editProfile">Edit
-                            profile</a>
-                        <a href="#" class="dropdown-item" data-right-sidebar="user-profile">Profile</a>
-                        <a href="#" class="dropdown-item" data-toggle="modal" data-target="#settingsModal">Settings</a>
-                        <a href="#" class="dropdown-item d-none d-md-block example-app-tour-start">Start Tour</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="login.html" class="dropdown-item text-danger">Logout</a>
-                    </div>
-                </li>
+                 <li class="list-inline-item d-inline d-lg-none">
+                        <a href={% if authenticated %}"{% url 'chats' %}" {% else %}"{% url 'anonymous_home' %}"{% endif %}
+                           class="btn btn-danger btn-floating example-chat-close">
+                            <i class="mdi mdi-arrow-left"></i>
+                        </a>
+                    </li>
             </ul>
         </div>
     </nav>
@@ -7648,7 +7633,7 @@
                             <i class="ti-search"></i>
                         </button>
                     </div>
-                    <input type="text" class="form-control" placeholder="Search chats">
+                    <input type="text" class="form-control" placeholder="You have {{ chats.count }} chats here">
                 </div>
             </form>
         </div>
@@ -7680,13 +7665,6 @@
                                 {% if msg is not None %}
                                     <small class="text-muted">{{ msg.time }}</small>
                                 {% endif %}
-                                <div class="action-toggle">
-                                    <div class="dropdown">
-                                        <a data-toggle="dropdown" href="{% url 'anonymous_home' %}">
-                                            <i class="mdi mdi-dots-horizontal"></i>
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </li>
