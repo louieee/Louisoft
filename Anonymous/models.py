@@ -12,7 +12,7 @@ from Anonymous.util import generate_username
 
 
 class Chat(models.Model):
-	name = models.CharField(max_length=24, default=None)
+	name = models.CharField(max_length=50, default=None)
 	ip_address = models.CharField(max_length=30, default=None)
 	consultant = models.ForeignKey('Anonymous.Consultant', on_delete=models.SET_NULL, default=None, null=True)
 	secret = models.BinaryField(default=Fernet.generate_key())
