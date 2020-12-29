@@ -8,7 +8,7 @@
     <title>Consult - Chat with {{ chat.name }}</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{% static 'Chat/media/img/favicon.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'Chat/mediia/img/favicon.png' %}" type="image/png">
 
     <!-- Google Nunito font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&amp;display=swap"
@@ -7615,13 +7615,13 @@
             <ul>
                 <li class="logo">
                     <a href="#">
-                        <img src="{% static 'Chat/media/img/logo.png' %}" alt="logo">
+                        <img src="{% static 'Chat/mediia/img/logo.png' %}" alt="logo">
                     </a>
                 </li>
                 <li data-toggle="tooltip" title="" data-placement="right" data-original-title="User menu" class="">
                     <a href="login.html" data-intro-js="3" data-toggle="dropdown" aria-expanded="false">
                         <figure class="avatar avatar-sm">
-                            <img src="{% static 'Chat/media/img/avatar9.jpg' %}" class="rounded-circle" alt="image">
+                            <img src="{% static 'Chat/mediia/img/avatar9.jpg' %}" class="rounded-circle" alt="image">
                         </figure>
                     </a>
                     <div class="dropdown-menu" style="">
@@ -7649,7 +7649,7 @@
         <div class="no-message-container">
             <div class="row mb-5">
                 <div class="col-md-4 offset-4">
-                    <img src="{% static 'Chat/media/svg/chat_empty.svg' %}" class="img-fluid" alt="image">
+                    <img src="{% static 'Chat/mediia/svg/chat_empty.svg' %}" class="img-fluid" alt="image">
                 </div>
             </div>
             <p class="lead">Choose a chat or start a <a href="#" data-left-sidebar="friends">new chat</a>.</p>
@@ -7657,7 +7657,7 @@
         <div class="chat-header">
             <div class="chat-header-user">
                 <figure class="avatar avatar-state-success">
-                    <img src="{% static 'Chat/media/img/avatar6.jpg' %}" class="rounded-circle" alt="image">
+                    <img src="{% static 'Chat/mediia/img/avatar6.jpg' %}" class="rounded-circle" alt="image">
                 </figure>
                 <div>
                     <h5>{{ consultant.code }}</h5>
@@ -7703,7 +7703,7 @@
                              in  {% if not authenticated %} {{ message.status }} {% endif %}">
                             <div class="message-avatar">
                                 <figure class="avatar avatar-sm">
-                                    <img src="{% static 'Chat/media/img/avatar6.jpg' %}" class="rounded-circle" alt="image">
+                                    <img src="{% static 'Chat/mediia/img/avatar6.jpg' %}" class="rounded-circle" alt="image">
                                 </figure>
                                 <div>
                                     <h5>{{ consultant.code }}</h5>
@@ -7741,7 +7741,7 @@
                             out {% if authenticated %} {{ message.status }} {% endif %}">
                                 <div class="message-avatar">
                                     <figure class="avatar avatar-sm">
-                                        <img src="{% static 'Chat/media/img/avatar9.jpg' %}" class="rounded-circle" alt="image">
+                                        <img src="{% static 'Chat/mediia/img/avatar9.jpg' %}" class="rounded-circle" alt="image">
                                     </figure>
                                     <div>
                                         <h5>{{ name }}</h5>
@@ -7901,7 +7901,7 @@
           }
           first_ = first_ + '"><div class="message-avatar">\
                                 <figure class="avatar avatar-sm">\
-                                    <img src="{% static 'Chat/media/img/avatar6.jpg' %}" class="rounded-circle" alt="image">\
+                                    <img src="{% static 'Chat/mediia/img/avatar6.jpg' %}" class="rounded-circle" alt="image">\
                                 </figure>\
                                 <div>\
                                     <h5>'+data["name"]+'</h5>\
@@ -7939,7 +7939,7 @@
           }
           result = result + '"><div class="message-avatar">\
                                     <figure class="avatar avatar-sm">\
-                                        <img src="{% static 'Chat/media/img/avatar9.jpg' %}" class="rounded-circle" alt="image">\
+                                        <img src="{% static 'Chat/mediia/img/avatar9.jpg' %}" class="rounded-circle" alt="image">\
                                     </figure>\
                                     <div>\
                                         <h5>'+data['name']+'</h5>\
