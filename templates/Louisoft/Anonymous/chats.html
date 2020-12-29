@@ -7612,7 +7612,7 @@
         <div class="nav-group">
             <ul>
                  <li class="list-inline-item d-inline d-lg-none">
-                        <a href={% if authenticated %}"{% url 'chats' %}" {% else %}"{% url 'anonymous_home' %}"{% endif %}
+                        <a href="{% url 'anonymous_home' %}"
                            class="btn btn-danger btn-floating example-chat-close">
                             <i class="mdi mdi-arrow-left"></i>
                         </a>
