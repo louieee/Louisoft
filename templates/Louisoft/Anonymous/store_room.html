@@ -595,7 +595,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <figure>
                                 <div class="snipcart-item block">
                                     <div class="snipcart-thumb">
-                                        <a href="{% url 'product' product.name %}"><img title=" " alt=" " src="{{ product.image.url }}" height="200"/></a>
+                                        <a href="{% url 'product' product.name %}"><img title=" " alt=" " src="{% static  product.static_url  %}" height="200"/></a>
                                         <p>{{ product.name}}</p>
                                         <h4>N{{product.selling_price}}</h4>
                                     </div>

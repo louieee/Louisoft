@@ -115,10 +115,15 @@ class Consultant(models.Model):
 
 class Product(models.Model):
 	HEALTH, SEX, BODY_BUILDING, TECH = range(4)
-	CATEGORIES = ((HEALTH, 'HEALTH'), (SEX, 'SEX'), (BODY_BUILDING, 'BODY_BUILDING'), (TECH, 'TECH'))
+	CATEGORIES = ((HEALTH, 'HEALTH'), (SEX, 'SEX'), (BODY_BUILDING, 'BODY_BUILDING'))
+	PICTURES = (('40_plus_men.jpg', '40 PLUS MEN'), ('40_plus_woman.jpg', '40 PLUS WOMAN'), ('a_and_r.jpg', 'A AND R'), ('african_potato.jpg', 'AFRICAN POTATO'), ('aloe_vite.jpg', 'ALOE VITE'), ('butchu_detox.jpg', 'BUTCHU DETOX'), ('calmag_plus.jpg', 'CALMAG PLUS'), ('calmeeze.jpg', 'CALMEEZE'), ('defender.jpg', 'DEFENDER'), ('dia_garde.jpg', 'DIA GARDE'), ('eye_garde.jpg', 'EYE GARDE'), ('hair_skin.jpg', 'HAIR SKIN'), ('kardio_garde.jpg', 'KARDIO GARDE'), ('kid_garde.jpg', 'KID GARDE'), ('memory_garde.jpg', 'MEMORY GARDE'), ('multi_vite.jpg', 'MULTI VITE'), ('omega_plus.jpg', 'OMEGA PLUS'), ('pro_b.jpg', 'PRO B'), ('rock_garde.jpg', 'ROCK GARDE'), ('sea_vital.jpg', 'SEA VITAL'), ('slim_garde_cla.jpg', 'SLIM GARDE CLA'), ('slim_garde_protein.jpg', 'SLIM GARDE PROTEIN'), ('slimgarde_kickstart.jpg', 'SLIMGARDE KICKSTART'), ('stress_garde.jpg', 'STRESS GARDE'), ('super_cider_plus.jpg', 'SUPER CIDER PLUS'))
+
+
+
+
 	name = models.CharField(max_length=30, default=None)
 	category = models.PositiveSmallIntegerField(default=None, choices=CATEGORIES)
-	image = models.ImageField(default=None, upload_to=f'Products/Images')
+	image = models.CharField(default=None, choices=PICTURES, max_length=30)
 	description = models.TextField(default=None)
 	cost_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
 	selling_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
@@ -128,6 +133,9 @@ class Product(models.Model):
 
 	def profit(self):
 		return self.selling_price - self.cost_price
+
+	def static_url(self):
+		return f'assets/img/products/{self.image}'
 
 
 class Order(models.Model):
