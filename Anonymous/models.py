@@ -123,7 +123,7 @@ class Product(models.Model):
 
 	name = models.CharField(max_length=30, default=None)
 	category = models.PositiveSmallIntegerField(default=None, choices=CATEGORIES)
-	image = models.CharField(default=None, choices=PICTURES, max_length=30)
+	image = models.CharField(default=None, choices=PICTURES, max_length=512)
 	description = models.TextField(default=None)
 	cost_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
 	selling_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
