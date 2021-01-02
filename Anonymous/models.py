@@ -121,7 +121,7 @@ class Product(models.Model):
 
 
 
-	name = models.CharField(max_length=30, default=None)
+	name = models.CharField(max_length=50, default=None)
 	category = models.PositiveSmallIntegerField(default=None, choices=CATEGORIES)
 	image = models.CharField(default=None, choices=PICTURES, max_length=512)
 	description = models.TextField(default=None)
