@@ -55,7 +55,7 @@
                         </p>
                     {% else %}
                     <p class="text-center text-white" style="color: rgba(255,255,255,255)">
-                        Send Payment to 3099717736 <br> Ohaegbu Louis Uzochukwu. <br>First Bank of Nigeria.</p>
+                        Send Payment to {{ consultant.bank_account }} <br> {{ consultant.bank_account_name }}. <br>{{ consultant.bank_name }}.</p>
                     <p class="text-center text-white" style="color: rgba(255,255,255,255)">Then Upload Payment evidence right here</p>
                     <form id="the_form" method="post" action="{% url 'payment' %}" enctype="multipart/form-data">
                         {% csrf_token %}

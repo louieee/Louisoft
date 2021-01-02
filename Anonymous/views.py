@@ -262,7 +262,8 @@ def webhook(request):
 def redirect_payment(request):
 	order = Order.objects.get(id=request.session['order_id'])
 	if request.method == 'GET':
-		return render(request, 'Louisoft/Anonymous/payment2.html')
+		consultant = order.chat.consultant
+		return render(request, 'Louisoft/Anonymous/payment2.html', {"consultant": consultant})
 	if request.method == 'POST':
 		evidence = request.FILES.get('evidence', False)
 		print(request.FILES)

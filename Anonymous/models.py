@@ -96,6 +96,9 @@ class Consultant(models.Model):
 	code = models.CharField(max_length=32, default=generate_username('Consultant'))
 	date = models.DateField(default=None)
 	limit = models.PositiveIntegerField(default=0)
+	bank_name = models.CharField(default='', max_length=50)
+	bank_account = models.CharField(default='', max_length=20)
+	bank_account_name = models.CharField(default='', max_length=50)
 	visitors = models.TextField(default='[]')
 	dismissed = models.TextField(default='[]')
 	blocked = models.TextField(default='[]')
@@ -113,7 +116,7 @@ class Consultant(models.Model):
 class Product(models.Model):
 	HEALTH, SEX, BODY_BUILDING, TECH = range(4)
 	CATEGORIES = ((HEALTH, 'HEALTH'), (SEX, 'SEX'), (BODY_BUILDING, 'BODY_BUILDING'), (TECH, 'TECH'))
-	name = models.CharField(max_length=20, default=None)
+	name = models.CharField(max_length=30, default=None)
 	category = models.PositiveSmallIntegerField(default=None, choices=CATEGORIES)
 	image = models.ImageField(default=None, upload_to=f'Products/Images')
 	description = models.TextField(default=None)
