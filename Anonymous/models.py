@@ -1,5 +1,6 @@
 import json
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta
+
 
 from cryptography.fernet import Fernet
 from django.db import models
@@ -7,6 +8,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 from django.db.models import Q
+from django.utils import timezone
 
 from Anonymous.util import generate_username
 
@@ -83,7 +85,7 @@ class Message(models.Model):
 		return None
 
 	def expired(self):
-		if (datetime.now() - self.time.astimezone()) > timedelta(seconds=180):
+		if (timezone.now() - self.time.astimezone()) > timedelta(seconds=180):
 			return True
 		return False
 
