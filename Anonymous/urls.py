@@ -19,5 +19,6 @@ urlpatterns = [
     path('dismiss/<name>', dismiss_client, name="dismiss_client"),
     path('order', make_order, name="make_order"),
     path('get_details', get_details, name="get_details"),
-    path('chat/<int:chat_id>/message/<int:id_>/delete', delete_message, name="delete")
+    path('chat/<int:chat_id>/message/<int:id_>/delete', delete_message, name="delete"),
+    path('order/<int:id_>', get_receipt, name="get_receipt")
 ]

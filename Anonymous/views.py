@@ -3,6 +3,7 @@ import random
 from datetime import datetime
 
 from decouple import config
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -212,11 +213,11 @@ def show_order(request):
 		return render(request, 'Louisoft/Anonymous/checkout.html', context)
 
 
-def get_receipt(request):
+@login_required(login_url='anonymous_home')
+def get_receipt(request, id_):
 	if request.method == 'GET':
-		order_id = request.GET.get('order_id')
-		order = Order.objects.get(id=order_id)
-		return json.dumps(order.receipt())
+		order = Order.objects.get(id=id_)
+		return render(request, 'Louisoft/Anonymous/checkout.html', context=order.receipt())
 
 
 def block(chat):
@@ -225,6 +226,8 @@ def block(chat):
 	blocked = chat.consultant.__blocked__()
 	blocked.append(chat.ip_address)
 	chat.consultant.blocked = json.dumps(blocked)
+	chat.blocked = True
+	chat.save()
 	chat.consultant.save()
 
 
@@ -234,6 +237,8 @@ def dismiss(chat):
 	dismissed = chat.consultant.__dismissed__()
 	dismissed.append(chat.ip_address)
 	chat.consultant.dismissed = json.dumps(dismissed)
+	chat.admitted = False
+	chat.save()
 	chat.consultant.save()
 
 
@@ -287,9 +292,6 @@ def redirect_payment(request):
 	if request.method == 'GET':
 		consultant = order.chat.consultant
 		return render(request, 'Louisoft/Anonymous/payment2.html', {"consultant": consultant})
-
-
-
 
 
 def get_details(request):
