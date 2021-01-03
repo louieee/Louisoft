@@ -83,7 +83,7 @@ class Message(models.Model):
 		return None
 
 	def expired(self):
-		if (datetime.now(timezone.utc) - self.time) > timedelta(seconds=180):
+		if (datetime.now() - self.time.astimezone()) > timedelta(seconds=180):
 			return True
 		return False
 
