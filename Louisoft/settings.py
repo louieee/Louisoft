@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['louisoft.herokuapp.com', 'www.louisoft.ml', '127.0.0.1', 'localhost']
 
@@ -73,8 +73,8 @@ TEMPLATES = [
 CHANNEL_LAYERS = {"default": {
 	"BACKEND": "channels_redis.core.RedisChannelLayer",
 	"CONFIG": {
-		# "hosts": [os.environ.get('REDIS_URL', 'redis://redis:6379')],
-		"hosts": [('localhost', 6379)],
+		"hosts": [os.environ.get('REDIS_URL', 'redis://redis:6379')],
+		# "hosts": [('localhost', 6379)],
 
 	}
 
