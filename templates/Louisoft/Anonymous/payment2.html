@@ -48,22 +48,10 @@
                         }
             </script>
                 <div class="wthree-text">
-                    {% if saved %}
-                        <p class="text-center text-white" style="color: rgba(255,255,255,255)">
-                            Your Evidence will be reviewed and you will be contacted concerning your order. <br>
-                            Thank you for patronizing us.
-                        </p>
-                    {% else %}
                     <p class="text-center text-white" style="color: rgba(255,255,255,255)">
                         Send Payment to {{ consultant.bank_account }} <br> {{ consultant.bank_account_name }}. <br>{{ consultant.bank_name }}.</p>
-                    <p class="text-center text-white" style="color: rgba(255,255,255,255)">Then Upload Payment evidence right here</p>
-                    <form id="the_form" method="post" action="{% url 'payment' %}" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <input id="evidence" accept="image/*" class="form-control" type="file" name="evidence" value=''>
-                        <a onclick="upload(this)"  class="btn btn-primary btn-lg btn-block">Upload</a>
-                    </form>
-                    {% endif %}
-
+                    <p class="text-center text-white" style="color: rgba(255,255,255,255)">Send Evidence to the Whatsapp account below along side your order ID.</p>
+                    <a href="{{ consultant.whatsapp_url }}" class="btn btn-success btn-block text-dark">Whatsapp Me</a>
                 </div>
 
         </div>

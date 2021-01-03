@@ -125,10 +125,25 @@ def store_room(request):
 			except Chat.DoesNotExist:
 				return redirect('404', reason=NOT_ALLOWED)
 			context['chat'] = chat_session
+		else:
+			chat_session = Chat.objects.filter(consultant_id=request.user.id).first
+			if chat is not None:
+				context['chat'] = chat_session
 		products = None
 		if category is not None:
-			category = dict(Product.CATEGORIES)[category]
-			products = Product.objects.filter(category=category)
+			if category == 'sex':
+				products = Product.objects.filter(sex_package=True)
+			elif category == 'children':
+				products = Product.objects.filter(children_package=True)
+			elif category == 'parents':
+				products = Product.objects.filter(parents_package=True)
+			elif category == 'defender':
+				products = Product.objects.filter(defender_package=True)
+			elif category == 'beauty':
+				products = Product.objects.filter(beauty_package=True)
+			else:
+				products = Product.objects.filter(general_wellbeing=True)
+			context['title'] = str(category).title()
 		else:
 			products = Product.objects.all()
 		context['products'] = products
@@ -264,15 +279,6 @@ def redirect_payment(request):
 	if request.method == 'GET':
 		consultant = order.chat.consultant
 		return render(request, 'Louisoft/Anonymous/payment2.html', {"consultant": consultant})
-	if request.method == 'POST':
-		evidence = request.FILES.get('evidence', False)
-		print(request.FILES)
-		if evidence:
-			order.evidence = evidence
-			order.save()
-			return render(request, 'Louisoft/Anonymous/payment2.html', {"saved": True})
-		else:
-			return redirect('payment')
 
 
 

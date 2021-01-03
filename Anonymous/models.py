@@ -99,6 +99,7 @@ class Consultant(models.Model):
 	bank_name = models.CharField(default='', max_length=50)
 	bank_account = models.CharField(default='', max_length=20)
 	bank_account_name = models.CharField(default='', max_length=50)
+	whatsapp_url = models.URLField(default='')
 	visitors = models.TextField(default='[]')
 	dismissed = models.TextField(default='[]')
 	blocked = models.TextField(default='[]')
@@ -115,18 +116,24 @@ class Consultant(models.Model):
 
 class Product(models.Model):
 	HEALTH, SEX, BODY_BUILDING, TECH = range(4)
-	CATEGORIES = ((HEALTH, 'HEALTH'), (SEX, 'SEX'), (BODY_BUILDING, 'BODY_BUILDING'))
 	PICTURES = (('40_plus_men.jpg', '40 PLUS MEN'), ('40_plus_woman.jpg', '40 PLUS WOMAN'), ('a_and_r.jpg', 'A AND R'), ('african_potato.jpg', 'AFRICAN POTATO'), ('aloe_vite.jpg', 'ALOE VITE'), ('butchu_detox.jpg', 'BUTCHU DETOX'), ('calmag_plus.jpg', 'CALMAG PLUS'), ('calmeeze.jpg', 'CALMEEZE'), ('defender.jpg', 'DEFENDER'), ('dia_garde.jpg', 'DIA GARDE'), ('eye_garde.jpg', 'EYE GARDE'), ('hair_skin.jpg', 'HAIR SKIN'), ('kardio_garde.jpg', 'KARDIO GARDE'), ('kid_garde.jpg', 'KID GARDE'), ('memory_garde.jpg', 'MEMORY GARDE'), ('multi_vite.jpg', 'MULTI VITE'), ('omega_plus.jpg', 'OMEGA PLUS'), ('pro_b.jpg', 'PRO B'), ('rock_garde.jpg', 'ROCK GARDE'), ('sea_vital.jpg', 'SEA VITAL'), ('slim_garde_cla.jpg', 'SLIM GARDE CLA'), ('slim_garde_protein.jpg', 'SLIM GARDE PROTEIN'), ('slimgarde_kickstart.jpg', 'SLIMGARDE KICKSTART'), ('stress_garde.jpg', 'STRESS GARDE'), ('super_cider_plus.jpg', 'SUPER CIDER PLUS'))
 
 
 
 
-	name = models.CharField(max_length=50, default=None)
-	category = models.PositiveSmallIntegerField(default=None, choices=CATEGORIES)
-	image = models.CharField(default=None, choices=PICTURES, max_length=512)
+	name = models.CharField(max_length=30, default=None)
+	image = models.CharField(default=None, choices=PICTURES, max_length=30)
 	description = models.TextField(default=None)
 	cost_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
 	selling_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+	sex_package = models.BooleanField(default=False)
+	children_package = models.BooleanField(default=False)
+	parents_package = models.BooleanField(default=False)
+	defender_package = models.BooleanField(default=False)
+	beauty_package = models.BooleanField(default=False)
+	general_wellbeing = models.BooleanField(default=False)
+
+
 
 	def __str__(self):
 		return self.name
@@ -150,7 +157,6 @@ class Order(models.Model):
 	email = models.EmailField(default=None, null=True, blank=True)
 	date_of_order = models.DateTimeField(auto_now=True)
 	date_of_payment = models.DateTimeField(default=None, null=True, blank=True)
-	evidence = models.ImageField(upload_to='Evidence', default=None, blank=True, null=True)
 
 	def total_price(self):
 		orders = json.loads(self.orders)

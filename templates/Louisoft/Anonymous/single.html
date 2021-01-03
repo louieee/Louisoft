@@ -1084,7 +1084,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="agileinfo_single">
         <h5>{{ product.name }}</h5>
         <div class="col-md-4 agileinfo_single_left">
-            <img id="example" src="{{ product.image.url }}" alt=" " class="img-responsive">
+            <img id="example" src="{% static product.static_url %}" alt=" " class="img-responsive">
         </div>
         <div class="col-md-8 agileinfo_single_right">
             <div class="rating1">
@@ -1135,7 +1135,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                         if (cart[element.name] === 0){
                                                             tab.value = 'Add To Cart'
                                                         }else {
-                                                            tab.value = 'Add ' + cart[element.name] +' to Cart'
+                                                            tab.value = 'Added ' + cart[element.name] +' to Cart'
                                                         }
                                                     }
                                                 </script>

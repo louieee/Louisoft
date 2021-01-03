@@ -569,7 +569,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- top-brands -->
 <div class="top-brands">
     <div class="container">
-        <h3 class="mb-5">Our Products</h3>
+        <h3 class="mb-5">Our Products{% if title %} in the {{ title }} Package {% else %} {% endif %} </h3>
         <script>
             const checkout = ()=>{
                 const cart = window.localStorage.getItem("{{ chat.name }}")
@@ -588,7 +588,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         <div class="agile_top_brands_grids">
             {% for product in products %}
-            <div class="col-md-3 top_brand_left">
+            <div class="col-md-3 top_brand_left mb-3 ">
                 <div class="hover14 column">
                     <div class="agile_top_brand_left_grid">
                         <div class="agile_top_brand_left_grid1">
@@ -625,7 +625,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                         if (cart[element.name] === 0){
                                                             tab.value = 'Add To Cart'
                                                         }else {
-                                                            tab.value = 'Add ' + cart[element.name] +' to Cart'
+                                                            tab.value = 'Added ' + cart[element.name] +' to Cart'
                                                         }
                                                     }
                                                 </script>
