@@ -50,6 +50,10 @@ class ChatConsumer(AsyncConsumer):
 			)
 		if self.chat_data['function'] in ['block', 'dismiss']:
 			self.chat_data['chat'] = self.chat.name
+			if self.chat_data['function'] == 'block':
+				await self.block_chat()
+			if self.chat_data['function'] == 'dismiss':
+				await self.dismiss_chat()
 			await self.channel_layer.group_send(
 				self.chat_room,
 				{"type": "send_message", "data": self.chat_data})
@@ -100,3 +104,15 @@ class ChatConsumer(AsyncConsumer):
 			return 'Deleted'
 		self.chat_data['result'] = 'Not Deleted'
 		return 'Not Deleted'
+
+	@database_sync_to_async
+	def block_chat(self):
+		block(self.chat)
+		self.chat_data['status'] = 'blocked'
+		return
+
+	@database_sync_to_async
+	def dismiss_chat(self):
+		dismiss(self.chat)
+		self.chat_data['status'] = 'dismissed'
+		return

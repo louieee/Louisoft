@@ -8089,14 +8089,7 @@
                   window.location.href='{% url 'chats' %}'
               }
               if (user === 'client'){
-                  const xmlHttp = new XMLHttpRequest();
-                      xmlHttp.onreadystatechange = function() {
-                      if (xmlHttp.readyState === 4 && xmlHttp.status === 200){
-                          window.location.href="{% url 'anonymous_home' %}"
-                      }
-                    }
-                      xmlHttp.open("GET","/consult/dismiss/"+my_data['chat'], true); // true for asynchronous
-                      xmlHttp.send(null);
+                  window.location.href="{% url 'anonymous_home' %}"
                 }
               }
           if (my_data.function === 'block'){
@@ -8104,14 +8097,7 @@
                   window.location.href = '{% url 'chats' %}'
               }
               if (user === 'client'){
-                  const xmlHttp = new XMLHttpRequest();
-                      xmlHttp.onreadystatechange = function() {
-                      if (xmlHttp.readyState === 4 && xmlHttp.status === 200){
-                          window.location.href="{% url 'anonymous_home' %}"
-                      }
-                    }
-                      xmlHttp.open("GET", "/consult/block/"+my_data['chat'], true); // true for asynchronous
-                      xmlHttp.send(null);
+                  window.location.href="{% url 'anonymous_home' %}"
                 }
       }
       }
