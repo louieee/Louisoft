@@ -1,4 +1,5 @@
 import json
+import random
 from datetime import datetime
 
 from decouple import config
@@ -35,10 +36,17 @@ def _404(request, reason):
 def enter_the_chat(request):
 	if request.method == 'GET':
 		if not request.user.is_authenticated:
-			consultant = request.GET['consultant']
-			_consultant = Consultant.objects.filter(code=consultant).first()
+			consultant = request.GET.get('consultant', False)
+			if not consultant:
+				consultant_ids = [c.id for c in Consultant.objects.all()]
+				random.shuffle(consultant_ids)
+				consultant_ids = consultant_ids[0]
+				_consultant = Consultant.objects.get(id=consultant_ids)
+			else:
+				_consultant = Consultant.objects.filter(code=consultant).first()
 			if _consultant is None:
 				return redirect('404', reason=WRONG_URL)
+
 			ip_address = fetch_ip_address(request)
 			blocked = _consultant.__blocked__()
 			if ip_address in blocked:
