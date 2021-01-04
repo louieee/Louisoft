@@ -1060,7 +1060,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <div class="logo_products">
 <script>
-          const checkout = ()=>{
+            const checkout = ()=>{
                 const cart = window.localStorage.getItem("{{ chat.name }}")
                 $.ajax(
                     {url : "{% url 'make_order' %}",
@@ -1071,6 +1071,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     }
                 );
             }
+
         </script>
         <input type="button" onclick="checkout()" class="btn btn-pulse btn-primary mt-5" value="Checkout"/>
 </div>

@@ -250,7 +250,11 @@ def show_single_product(request, name):
 			chat = Chat.objects.filter(ip_address=ip_address).first()
 			if chat is None:
 				return redirect('404', reason=WRONG_URL)
-			context['chat'] = chat
+		else:
+			chat = Chat.objects.filter(consultant_id=request.user.id).first()
+			if chat is None:
+				return redirect('404', reason=WRONG_URL)
+		context['chat'] = chat
 		product = Product.objects.get(name=name)
 		context['product'] = product
 		return render(request, 'Louisoft/Anonymous/single.html', context)
