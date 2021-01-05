@@ -217,7 +217,10 @@ def show_order(request):
 def get_receipt(request, id_):
 	if request.method == 'GET':
 		order = Order.objects.get(id=id_)
-		return render(request, 'Louisoft/Anonymous/checkout.html', context=order.receipt())
+		context = order.receipt()
+		context['address'] = order.address
+		context['phone'] = order.phone
+		return render(request, 'Louisoft/Anonymous/checkout.html', context=context)
 
 
 def block(chat):

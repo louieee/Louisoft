@@ -787,7 +787,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <thead>
                 <tr>
                     <th>Product</th>
-                    <th>Quality</th>
+                    <th>Quantity</th>
                     <th>Price</th>
                     <th>Total Price</th>
 
@@ -811,7 +811,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="col-md-4 checkout-left-basket">
 
                 <ul>
-
+                    {% if phone %}
+                        <li>Phone Number <i>-</i> {{ phone }}</li>
+                        <li>Address <i>-</i> {{ address }}</li>
+                    {% endif %}
 
                     <li>Total <i>-</i> <span>N {{ grand_total }}</span></li>
                 </ul>
