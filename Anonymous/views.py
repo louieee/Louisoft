@@ -4,6 +4,7 @@ from datetime import datetime
 
 from decouple import config
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -319,3 +320,23 @@ def delete_message(request, chat_id, id_):
 		chat = Chat.objects.get(id=chat_id)
 		chat.add_deleted_msg(user, id_)
 		return HttpResponse('deleted')
+
+
+def product_data(request):
+	if request.method == 'GET':
+		products = Product.objects.all()
+		data = cache.get('products')
+		if data is None:
+			print('not in cache')
+			data = [
+				{
+					"id": product.id,
+					"name": product.name,
+					"price": f'N{product.selling_price}',
+					"details": product.description
+				}
+				for product in products
+			]
+			cache.set('products', data)
+
+		return HttpResponse(json.dumps(data))
